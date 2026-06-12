@@ -19,6 +19,11 @@ const path = require('path');
 const productosDir = path.join(__dirname, 'content', 'productos');
 const indexPath    = path.join(__dirname, 'content', 'productos-index.json');
 
+if (!fs.existsSync(productosDir)) {
+  console.warn('content/productos no encontrado; omitiendo generación del índice.');
+  process.exit(0);
+}
+
 try {
   const files = fs.readdirSync(productosDir)
     .filter(f => f.endsWith('.json'))
