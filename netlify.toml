@@ -1,0 +1,55 @@
+# =============================================================
+# DITSÖ — Configuración de Netlify
+# Este archivo le dice a Netlify cómo construir y publicar el sitio.
+# =============================================================
+
+[build]
+  # Comando que se ejecuta antes de publicar.
+  # Genera content/productos-index.json con la lista de productos.
+  command = "node build-index.js"
+
+  # Carpeta que Netlify publica (todo el sitio está en la raíz).
+  publish = "."
+
+# ── Redirecciones ────────────────────────────────────────────
+# Necesario para que el panel de admin funcione correctamente.
+[[redirects]]
+  from   = "/admin"
+  to     = "/admin/index.html"
+  status = 200
+
+# ── Headers de seguridad ─────────────────────────────────────
+# Estos headers se aplican a TODAS las páginas del sitio.
+# Son más fuertes que los meta tags del HTML — ambas capas activas.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options          = "DENY"
+    X-Content-Type-Options   = "nosniff"
+    Referrer-Policy          = "strict-origin-when-cross-origin"
+    Permissions-Policy       = "camera=(), microphone=(), geolocation=()"
+
+# ── Cache: archivos que no cambian ───────────────────────────
+# CSS, JS y fonts: cache agresivo (1 año).
+# Netlify agrega un hash al nombre del archivo en cada deploy,
+# así que el cache no causa problemas de versión vieja.
+[[headers]]
+  for = "/css/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/js/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000"  # 30 días para imágenes
+
+# ── Cache: JSON de productos (corto — cambian con el CMS) ────
+[[headers]]
+  for = "/content/*"
+  [headers.values]
+    Cache-Control = "public, max-age=300, stale-while-revalidate=60"
