@@ -26,11 +26,11 @@
              Refactorizar a clases CSS en Phase 2 para eliminar este permiso. -->
   <meta http-equiv="Content-Security-Policy" content="
     default-src 'self';
-    script-src 'self';
+    script-src 'self' 'unsafe-inline' https://identity.netlify.com https://unpkg.com;
     style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
-    font-src 'self' https://fonts.gstatic.com;
-    img-src 'self' data: https://via.placeholder.com https://placehold.co;
-    connect-src 'self';
+    font-src 'self' https://fonts.gstatic.com https://unpkg.com;
+    img-src 'self' data: blob: https://via.placeholder.com https://placehold.co;
+    connect-src 'self' https://*.netlify.com https://*.netlify.app;
     frame-ancestors 'none';
     base-uri 'self';
     form-action 'self'
