@@ -1602,12 +1602,7 @@ p {
   background: linear-gradient(to right, var(--color-terracotta), var(--color-gold), var(--color-olive));
 }
 
-.site-footer::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-}
+
 
 .footer__inner {
   position: relative;
@@ -2103,4 +2098,16 @@ p {
 [class*="__pattern"],
 [class*="__texture"] {
   display: none !important;
+}
+
+
+/* ── OVERRIDE: eliminar pseudo-elementos decorativos de secciones ── */
+.site-footer::after,
+.ofertas::after,
+.sobre-ditso::after,
+.hero::after,
+.tienda::after,
+.atencion::after {
+  display: none !important;
+  content: none !important;
 }
