@@ -691,12 +691,7 @@ p {
 
 /* Patrón decorativo de hojas en el fondo */
 .hero__bg-pattern {
-  position: absolute;
-  inset: 0;
-  opacity: 0.06;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cellipse cx='40' cy='40' rx='15' ry='30' fill='%23D4B434' transform='rotate(-30 40 40)'/%3E%3C/svg%3E");
-  background-size: 80px 80px;
-  pointer-events: none;
+  display: none; /* patrón removido — fondo plano */
 }
 
 /* Acento decorativo esquina */
@@ -707,7 +702,6 @@ p {
   width: 400px;
   height: 400px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(212,180,52,0.15) 0%, transparent 70%);
   pointer-events: none;
 }
 
@@ -718,7 +712,6 @@ p {
   width: 350px;
   height: 350px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(85,101,37,0.1) 0%, transparent 70%);
   pointer-events: none;
 }
 
@@ -885,8 +878,6 @@ p {
   content: '';
   position: absolute;
   inset: 0;
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cellipse cx='30' cy='30' rx='10' ry='22' fill='rgba(255,255,255,0.08)' transform='rotate(-20 30 30)'/%3E%3C/svg%3E") repeat;
-  background-size: 60px 60px;
 }
 
 .sobre-ditso__image-frame img {
@@ -1197,8 +1188,6 @@ p {
   content: '';
   position: absolute;
   inset: 0;
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cellipse cx='50' cy='50' rx='18' ry='38' fill='rgba(212,180,52,0.06)' transform='rotate(-15 50 50)'/%3E%3C/svg%3E") repeat;
-  background-size: 100px 100px;
   pointer-events: none;
 }
 
@@ -1613,14 +1602,7 @@ p {
   background: linear-gradient(to right, var(--color-terracotta), var(--color-gold), var(--color-olive));
 }
 
-.site-footer::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cellipse cx='30' cy='30' rx='10' ry='22' fill='rgba(212,180,52,0.04)' transform='rotate(-30 30 30)'/%3E%3C/svg%3E") repeat;
-  background-size: 60px 60px;
-  pointer-events: none;
-}
+
 
 .footer__inner {
   position: relative;
@@ -2087,3 +2069,45 @@ p {
 /* ─────────────────────────────────────────────
    FIN DE ESTILOS (actualizado)
    ───────────────────────────────────────────── */
+
+
+/* Hero — fondo plano sin imagen (imagen removida en Phase 1) */
+.hero__image-frame,
+.hero__image-placeholder {
+  display: none;
+}
+
+.hero__content {
+  max-width: 720px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* Logo imagen real — ajuste de tamaño */
+.logo__isotipo {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+  display: block;
+}
+
+
+/* ── OVERRIDE GLOBAL: sin patrones de fondo en ninguna sección ──
+   Todos los fondos son colores planos. */
+[class*="bg-pattern"],
+[class*="__pattern"],
+[class*="__texture"] {
+  display: none !important;
+}
+
+
+/* ── OVERRIDE: eliminar pseudo-elementos decorativos de secciones ── */
+.site-footer::after,
+.ofertas::after,
+.sobre-ditso::after,
+.hero::after,
+.tienda::after,
+.atencion::after {
+  display: none !important;
+  content: none !important;
+}
