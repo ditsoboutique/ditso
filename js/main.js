@@ -199,12 +199,12 @@ function initFontSizeToggle() {
   const btnLarge  = document.getElementById('font-large');
   if (!btnNormal || !btnLarge) return;
 
-  const savedSize = localStorage.getItem('ditso-font-size');
+  const savedSize = (() => { try { return localStorage.getItem('ditso-font-size'); } catch(e) { return null; } })();
   if (savedSize === 'large') applyLarge();
   else applyNormal();
 
-  btnNormal.addEventListener('click', () => { applyNormal(); localStorage.setItem('ditso-font-size', 'normal'); });
-  btnLarge.addEventListener('click',  () => { applyLarge();  localStorage.setItem('ditso-font-size', 'large');  });
+  btnNormal.addEventListener('click', () => { applyNormal(); try { localStorage.setItem('ditso-font-size', 'normal'); } catch(e) {}; });
+  btnLarge.addEventListener('click',  () => { applyLarge();  try { localStorage.setItem('ditso-font-size', 'large');  } catch(e) {};  });
 
   function applyNormal() {
     document.body.classList.remove('font-large');
