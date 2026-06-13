@@ -850,8 +850,6 @@ p {
 .sobre-ditso {
   background: var(--bg-main);
   padding: var(--space-xl) 0;
-  content-visibility: auto;
-  contain-intrinsic-size: 0 800px;
 }
 
 .sobre-ditso__inner {
@@ -975,9 +973,7 @@ p {
 .tienda {
   background: var(--bg-section-alt);
   padding: var(--space-xl) 0;
-  /* Performance: skip rendering until near viewport — browser support: Chrome/Edge/Opera */
-  content-visibility: auto;
-  contain-intrinsic-size: 0 1200px; /* estimated height prevents layout shift */
+  /* Performance: skip rendering until near viewport — browser support: Chrome/Edge/Opera */ /* estimated height prevents layout shift */
 }
 
 .tienda__header {
@@ -1317,8 +1313,6 @@ p {
 .guia-tallas {
   background: var(--bg-main);
   padding: var(--space-xl) 0;
-  content-visibility: auto;
-  contain-intrinsic-size: 0 700px;
 }
 
 .guia-tallas__header {
@@ -2164,3 +2158,36 @@ img.logo__isotipo {
   /* Drop shadow sutil para que se vea bien sobre cualquier fondo */
   filter: drop-shadow(0 1px 3px rgba(0,0,0,0.15));
 }
+
+
+/* ── CROSS-BROWSER / CROSS-PLATFORM FIXES ──────────────────
+   Compatibilidad con Safari, iOS, Android, y navegadores legacy.
+   ─────────────────────────────────────────────────────────── */
+
+/* iOS — quitar flash azul al tocar botones y enlaces */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* iOS Safari — scroll suave en contenedores con overflow */
+.mobile-nav,
+.size-table-wrapper {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* iOS Safari — respetar el notch y home indicator */
+.site-header {
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}
+.site-footer {
+  padding-bottom: calc(var(--space-md) + env(safe-area-inset-bottom));
+}
+.whatsapp-float {
+  bottom: calc(28px + env(safe-area-inset-bottom));
+  right: calc(24px + env(safe-area-inset-right));
+}
+
+/* localStorage fallback — si está bloqueado (Safari privado),
+   el toggle de fuente simplemente no persiste entre visitas.
+   No es un error crítico — ver main.js try/catch. */
