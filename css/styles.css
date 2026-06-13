@@ -2087,3 +2087,24 @@ p {
 /* ─────────────────────────────────────────────
    FIN DE ESTILOS (actualizado)
    ───────────────────────────────────────────── */
+
+
+/* Hero — fondo plano sin imagen (imagen removida en Phase 1) */
+.hero__image-frame,
+.hero__image-placeholder {
+  display: none;
+}
+
+.hero__content {
+  max-width: 720px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* Logo imagen real — ajuste de tamaño */
+.logo__isotipo {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+  display: block;
+}
