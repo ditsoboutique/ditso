@@ -691,10 +691,7 @@ p {
 
 /* Patrón decorativo de hojas en el fondo */
 .hero__bg-pattern {
-  position: absolute;
-  inset: 0;
-  opacity: 0.06;
-  pointer-events: none;
+  display: none; /* patrón removido — fondo plano */
 }
 
 /* Acento decorativo esquina */
@@ -2097,4 +2094,13 @@ p {
   height: 44px;
   object-fit: contain;
   display: block;
+}
+
+
+/* ── OVERRIDE GLOBAL: sin patrones de fondo en ninguna sección ──
+   Todos los fondos son colores planos. */
+[class*="bg-pattern"],
+[class*="__pattern"],
+[class*="__texture"] {
+  display: none !important;
 }
