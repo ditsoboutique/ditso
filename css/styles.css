@@ -2111,3 +2111,45 @@ p {
   display: none !important;
   content: none !important;
 }
+
+/* ================================================================
+   DITSÖ — PATTERN REMOVAL OVERRIDE
+   Elimina TODOS los patrones de fondo en todas las secciones.
+   Este bloque sobreescribe cualquier patrón que venga del CSS base.
+   ================================================================ */
+
+/* Quitar background-image de TODOS los elementos */
+* {
+  background-image: none !important;
+}
+
+/* Quitar pseudo-elementos decorativos */
+.site-footer::after,
+.site-footer::before + *,
+.ofertas::after,
+.sobre-ditso::after,
+.hero::after,
+.tienda::after,
+.atencion::after,
+.hero__bg-pattern,
+[class*="bg-pattern"],
+[class*="__pattern"],
+[class*="__texture"] {
+  display: none !important;
+  content: none !important;
+  background: none !important;
+  background-image: none !important;
+}
+
+/* Restaurar el gradiente del top border del footer (el único decorativo válido) */
+.site-footer::before {
+  display: block !important;
+  content: '' !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  height: 3px !important;
+  background: linear-gradient(to right, var(--color-terracotta), var(--color-gold), var(--color-olive)) !important;
+  background-image: linear-gradient(to right, var(--color-terracotta), var(--color-gold), var(--color-olive)) !important;
+}
