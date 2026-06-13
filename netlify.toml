@@ -6,7 +6,7 @@
 [build]
   # Comando que se ejecuta antes de publicar.
   # Genera content/productos-index.json con la lista de productos.
-  command = "node build-index.js"
+  command = "node build-index.js || python3 build-index.js"
 
   # Carpeta que Netlify publica (todo el sitio está en la raíz).
   publish = "."
