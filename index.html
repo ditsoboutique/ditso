@@ -795,6 +795,25 @@
     <span class="whatsapp-float__label">WhatsApp</span>
   </a>
 
+  <!-- Netlify Identity Widget
+       Necesario para manejar los tokens de invitación/recuperación
+       que Netlify envía por email al administrador del CMS.
+       Sin esto, el link del email redirige al home sin abrir el formulario. -->
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+
+  <!-- Redirigir al admin después de login -->
+  <script>
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on("init", user => {
+        if (!user) {
+          window.netlifyIdentity.on("login", () => {
+            document.location.href = "/admin/";
+          });
+        }
+      });
+    }
+  </script>
+
   <!-- Script principal -->
   <script src="js/main.js"></script>
 
