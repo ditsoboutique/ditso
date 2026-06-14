@@ -1,29 +1,24 @@
 # =============================================================
 # DITSÖ — Decap CMS Configuration
-# Archivo: admin/config.yml
-#
-# Este archivo define qué campos aparecen en el panel de admin.
-# Documentación: https://decapcms.org/docs/configuration-options/
+# Backend: GitHub OAuth via Cloudflare Worker
 # =============================================================
 
-# ── BACKEND: GitHub + Netlify Identity ──────────────────────
 backend:
-  name: git-gateway
-  branch: main   # ← Cambiar a 'master' si su rama principal se llama así
+  name: github
+  repo: ditsoboutique/ditso
+  branch: main
+  base_url: https://ditso-oauth.ditsoboutiquecr.workers.dev
+  auth_endpoint: /auth
 
-# ── MEDIA: Dónde se guardan las fotos ───────────────────────
+# Donde se guardan las fotos subidas por el CMS
 media_folder: "assets/productos"
-public_folder: "/assets/productos"
-
-# ── PRUEBAS LOCALES (descomentar para probar en su computadora) ──
-# local_backend: true
+public_folder: "/ditso/assets/productos"
 
 locale: es
 
-# ── COLECCIONES ──────────────────────────────────────────────
 collections:
 
-  # ── 1. PRODUCTOS ──────────────────────────────────────────
+  # ── PRODUCTOS ──────────────────────────────────────────────
   - name: "productos"
     label: "Productos"
     label_singular: "Producto"
@@ -33,38 +28,16 @@ collections:
     slug: "{{id}}"
     identifier_field: name
     summary: "{{name}} — ₡{{price}}"
-    sortable_fields: ["name", "category", "price"]
-    view_filters:
-      - label: "Solo ofertas"
-        field: inOffer
-        pattern: true
-      - label: "Blusas"
-        field: category
-        pattern: "blusas"
-      - label: "Vestidos"
-        field: category
-        pattern: "vestidos"
-      - label: "Pantalones"
-        field: category
-        pattern: "pantalones"
-      - label: "Accesorios"
-        field: category
-        pattern: "accesorios"
-      - label: "Ropa Cómoda"
-        field: category
-        pattern: "ropa-comoda"
 
     fields:
       - label: "ID del producto"
         name: "id"
         widget: "string"
-        hint: "Solo letras minúsculas, números y guiones. Ej: blusa-lino-natural. NO cambiar después de creado."
-        pattern: ['^[a-z0-9-]+$', "Solo letras minúsculas, números y guiones (-)"]
+        hint: "Solo letras minúsculas y guiones. Ej: blusa-lino-natural. NO cambiar después de creado."
 
       - label: "Nombre del producto"
         name: "name"
         widget: "string"
-        hint: "Nombre que verán las clientas. Ej: Blusa de Lino Natural"
 
       - label: "Categoría"
         name: "category"
@@ -89,68 +62,56 @@ collections:
       - label: "Descripción"
         name: "description"
         widget: "text"
-        hint: "Una o dos oraciones describiendo la prenda. Máximo 150 caracteres recomendado."
 
       - label: "Precio (₡ colones)"
         name: "price"
         widget: "number"
         value_type: "int"
-        min: 1000
-        hint: "Precio en colones sin puntos ni comas. Ej: 28500"
 
       - label: "Precio original (₡) — solo si está en oferta"
         name: "priceOriginal"
         widget: "number"
         value_type: "int"
         required: false
-        hint: "Dejar vacío si no hay descuento. Poner el precio anterior aquí cuando hay oferta."
 
       - label: "Foto del producto"
         name: "image"
         widget: "image"
         required: false
-        allow_multiple: false
-        hint: "Tamaño recomendado: 800x1000px. Formato: JPG o WebP. Máximo 500KB."
-        media_library:
-          config:
-            max_file_size: 512000
+        hint: "Tamaño ideal: 800x1000px. Formato JPG o WebP. Máximo 500KB."
 
       - label: "Mostrar en sección Ofertas"
         name: "inOffer"
         widget: "boolean"
         default: false
-        hint: "Active esto para que aparezca en Ofertas Especiales."
 
       - label: "Visible en la tienda"
         name: "active"
         widget: "boolean"
         default: true
-        hint: "Desactive para ocultar temporalmente sin borrar el producto."
 
-  # ── 2. CONFIGURACIÓN DE CONTACTO ──────────────────────────
+  # ── CONFIGURACIÓN DE CONTACTO ──────────────────────────────
   - name: "configuracion"
     label: "Configuracion del Sitio"
     files:
-      - label: "Datos de Contacto y WhatsApp"
+      - label: "WhatsApp y Contacto"
         name: "contacto"
         file: "content/config/contacto.json"
         fields:
           - label: "Numero de WhatsApp"
             name: "whatsappNumber"
             widget: "string"
-            hint: "Con codigo de pais, sin espacios. Ej: 50688887777"
+            hint: "Con codigo de pais. Ej: 50685978998"
 
           - label: "Correo electronico"
             name: "storeEmail"
             widget: "string"
-            hint: "Ej: hola@ditso.cr"
 
           - label: "Mensaje de bienvenida WhatsApp"
             name: "whatsappMessage"
             widget: "text"
-            hint: "Mensaje automatico cuando alguien hace clic en WhatsApp."
 
-  # ── 3. IMAGEN HERO ────────────────────────────────────────
+  # ── IMAGEN HERO ────────────────────────────────────────────
   - name: "hero"
     label: "Pagina de Inicio"
     files:
@@ -162,6 +123,5 @@ collections:
             name: "heroImage"
             widget: "image"
             required: false
-            hint: "Foto principal del sitio. Tamano ideal: 900x1100px."
             media_folder: "assets/hero"
-            public_folder: "/assets/hero"
+            public_folder: "/ditso/assets/hero"
