@@ -13,10 +13,8 @@
   <meta name="keywords" content="ropa mujer Costa Rica, ropa orgánica, ropa cómoda, mujeres mayores, Ditsö, Bribri, moda costarricense">
   <meta name="author" content="Ditsö">
 
-  <!-- Seguridad — HTTP Security Headers vía meta tags
-       NOTA: Cuando se despliegue en un servidor (Nginx, Apache, Netlify, Vercel),
-       estos mismos valores deben configurarse también como HTTP headers reales
-       en el servidor — los meta tags son un segundo nivel de protección. -->
+  <!-- Seguridad — meta tags (GitHub Pages no permite headers HTTP custom).
+       Para hosting con headers reales, ver netlify.toml como referencia. -->
 
   <!-- Evita que el sitio sea embebido en iframes (clickjacking) -->
   <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
@@ -28,11 +26,11 @@
              Refactorizar a clases CSS en Phase 2 para eliminar este permiso. -->
   <meta http-equiv="Content-Security-Policy" content="
     default-src 'self';
-    script-src 'self' 'unsafe-inline' https://identity.netlify.com https://unpkg.com;
+    script-src 'self';
     style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
-    font-src 'self' https://fonts.gstatic.com https://unpkg.com;
-    img-src 'self' data: blob: https://via.placeholder.com https://placehold.co;
-    connect-src 'self' https://*.netlify.com https://*.netlify.app;
+    font-src 'self' https://fonts.gstatic.com;
+    img-src 'self' data: blob:;
+    connect-src 'self';
     frame-ancestors 'none';
     base-uri 'self';
     form-action 'self'
@@ -664,8 +662,8 @@
           <ul class="footer__links">
             <li><a href="#atencion">Devoluciones y Cambios</a></li>
             <li><a href="#atencion">Política de Envíos</a></li>
-            <li><a href="#">Privacidad y Datos</a></li>
-            <li><a href="#">Términos de Uso</a></li>
+            <li><a href="#atencion">Privacidad y Datos</a></li>
+            <li><a href="#atencion">Términos de Uso</a></li>
           </ul>
         </div>
 
@@ -708,9 +706,9 @@
           © 2025 Ditsö. Costa Rica. Todos los derechos reservados.
         </p>
         <nav class="footer__policies" aria-label="Políticas del sitio">
-          <a href="#">Devoluciones</a>
-          <a href="#">Envíos</a>
-          <a href="#">Privacidad</a>
+          <a href="#atencion">Devoluciones</a>
+          <a href="#atencion">Envíos</a>
+          <a href="#atencion">Privacidad</a>
         </nav>
       </div>
 
@@ -796,19 +794,6 @@
     </svg>
     <span class="whatsapp-float__label">WhatsApp</span>
   </a>
-
-  <!-- Redirigir al admin después de login -->
-  <script>
-    if (window.netlifyIdentity) {
-      window.netlifyIdentity.on("init", user => {
-        if (!user) {
-          window.netlifyIdentity.on("login", () => {
-            document.location.href = "/admin/";
-          });
-        }
-      });
-    }
-  </script>
 
   <!-- Script principal -->
   <script src="js/main.js"></script>

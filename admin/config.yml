@@ -15,13 +15,18 @@ collections:
     label: "Productos"
     label_singular: "Producto"
     folder: "content/productos"
+    format: json
+    extension: json
     create: true
     delete: true
     slug: "{{id}}"
-    identifier_field: name
+    identifier_field: id
     summary: "{{name}} — ₡{{price}}"
     fields:
-      - { label: "ID", name: "id", widget: "string" }
+      - label: "ID (sin espacios, ej: blusa-lino-natural)"
+        name: "id"
+        widget: "string"
+        pattern: ['^[a-z0-9-]+$', "Use solo letras minúsculas, números y guiones"]
       - { label: "Nombre", name: "name", widget: "string" }
       - label: "Categoría"
         name: "category"

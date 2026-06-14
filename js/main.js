@@ -47,6 +47,19 @@ function sanitize(str) {
   return d.innerHTML;
 }
 
+/* Resuelve rutas de contenido respetando <base href> (GitHub Pages /ditso/). */
+function contentUrl(relativePath) {
+  return new URL(relativePath, document.baseURI).href;
+}
+
+/* Normaliza rutas de imágenes del CMS (/ditso/assets/... o assets/...). */
+function resolveAssetUrl(path) {
+  if (!path) return '';
+  if (/^https?:\/\//i.test(path)) return path;
+  if (path.startsWith('/')) return path;
+  return contentUrl(path);
+}
+
 
 /* ═══════════════════════════════════════════════
    2. LOADER — carga de datos desde JSON
@@ -65,26 +78,23 @@ function sanitize(str) {
  * content/productos-index.json que lista los IDs disponibles.
  * El CMS lo actualiza automáticamente vía el script de build.
  */
+async function loadProductById(id) {
+  const res = await fetch(contentUrl(`content/productos/${id}.json`));
+  if (!res.ok) return null;
+  return res.json();
+}
+
 async function loadProducts() {
   try {
-    /* Intentar cargar el índice primero */
-    const indexRes = await fetch('/content/productos-index.json');
+    const indexRes = await fetch(contentUrl('content/productos-index.json'));
     if (!indexRes.ok) throw new Error('Index not found');
     const index = await indexRes.json();
 
-    /* Cargar todos los productos en paralelo */
-    const promises = index.map(id =>
-      fetch(`/content/productos/${id}.json`)
-        .then(r => r.ok ? r.json() : null)
-        .catch(() => null)
-    );
-    const results = await Promise.all(promises);
+    const results = await Promise.all(index.map(loadProductById));
     return results.filter(p => p !== null && p.active !== false);
 
   } catch {
-    /* Fallback: si no hay índice, intentar cargar los IDs conocidos.
-       Útil durante desarrollo o si el índice no se generó. */
-    console.warn('Ditsö: products-index.json no encontrado. Usando lista de respaldo.');
+    console.warn('Ditsö: productos-index.json no encontrado. Usando lista de respaldo.');
     return loadProductsFallback();
   }
 }
@@ -96,9 +106,11 @@ async function loadProductsFallback() {
     'blusa-lino-natural',
     'blusa-bordada-campo',
     'blusa-manga-campana',
+    'blusa-azul',
     'vestido-jardin',
     'vestido-brisa-manana',
     'vestido-siesta',
+    'vestido-test',
     'pantalon-lino-clasico',
     'pantalon-capri-organico',
     'panuelo-seda-floral',
@@ -106,19 +118,14 @@ async function loadProductsFallback() {
     'bata-algodon-organico',
     'conjunto-relax-lino',
   ];
-  const promises = knownIds.map(id =>
-    fetch(`/content/productos/${id}.json`)
-      .then(r => r.ok ? r.json() : null)
-      .catch(() => null)
-  );
-  const results = await Promise.all(promises);
+  const results = await Promise.all(knownIds.map(loadProductById));
   return results.filter(p => p !== null && p.active !== false);
 }
 
 /* Carga la configuración de contacto desde el JSON del CMS */
 async function loadConfig() {
   try {
-    const res = await fetch('/content/config/contacto.json');
+    const res = await fetch(contentUrl('content/config/contacto.json'));
     if (!res.ok) throw new Error('Config not found');
     const data = await res.json();
     /* Sobreescribir CONFIG con los valores del CMS */
@@ -134,16 +141,15 @@ async function loadConfig() {
 /* Carga la imagen hero desde el JSON del CMS */
 async function loadHeroImage() {
   try {
-    const res = await fetch('/content/config/hero.json');
+    const res = await fetch(contentUrl('content/config/hero.json'));
     if (!res.ok) return;
     const data = await res.json();
     if (data.heroImage) {
       const placeholder = document.querySelector('.hero__image-placeholder');
       const frame = document.querySelector('.hero__image-frame');
       if (frame && placeholder) {
-        /* Reemplazar el placeholder con la imagen real */
         const img = document.createElement('img');
-        img.src = data.heroImage;
+        img.src = resolveAssetUrl(data.heroImage);
         img.alt = 'Mujer usando ropa Ditsö en jardín costarricense';
         img.loading = 'eager';
         img.fetchPriority = 'high';
@@ -254,7 +260,7 @@ function buildProductCard(product) {
   const safeCat   = sanitize(product.category);
 
   const imagePart = product.image
-    ? `<img src="${sanitize(product.image)}" alt="Fotografía de ${safeName}" loading="lazy" decoding="async">`
+    ? `<img src="${sanitize(resolveAssetUrl(product.image))}" alt="Fotografía de ${safeName}" loading="lazy" decoding="async">`
     : `<div class="product-card__image-placeholder" aria-hidden="true">
          ${getLeafSVG(48)}
          <span>Foto próximamente</span>
@@ -311,7 +317,7 @@ function buildOfferCard(product) {
   const nameEsc  = product.name.replace(/'/g, "\\'");
 
   const imagePart = product.image
-    ? `<img src="${sanitize(product.image)}" alt="Fotografía de ${safeName}" loading="lazy" decoding="async">`
+    ? `<img src="${sanitize(resolveAssetUrl(product.image))}" alt="Fotografía de ${safeName}" loading="lazy" decoding="async">`
     : `<div class="img-placeholder" aria-hidden="true">
          ${getLeafSVG(48)}
          <span>Foto próximamente</span>
@@ -352,7 +358,7 @@ function renderCatalog(products) {
   if (grid) {
     if (products.length === 0) {
       grid.innerHTML = `<p style="text-align:center; color: var(--color-text-secondary); padding: var(--space-xl) 0; grid-column: 1/-1;">
-        Los productos se están cargando. Vuelva pronto.
+        No hay productos disponibles en este momento. Contáctenos por WhatsApp.
       </p>`;
     } else {
       grid.innerHTML = products.map(buildProductCard).join('');
@@ -564,10 +570,10 @@ document.addEventListener('DOMContentLoaded', async () => {
   modalOverlay.init();
 
   console.info(
-    '%cDitsö v2.0 — CMS conectado ✓',
+    '%cDitsö v2.1 — CMS conectado ✓',
     'color: #D4B434; font-weight: bold; font-size: 14px;'
   );
   console.info(`  Productos cargados: ${products.length}`);
   console.info(`  WhatsApp: ${CONFIG.whatsappNumber}`);
-  console.info('  Panel admin: /admin/');
+  console.info(`  Panel admin: ${contentUrl('admin/')}`);
 });

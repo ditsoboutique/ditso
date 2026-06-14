@@ -1,6 +1,7 @@
 # =============================================================
-# DITSÖ — Configuración de Netlify
-# Este archivo le dice a Netlify cómo construir y publicar el sitio.
+# DITSÖ — Configuración de Netlify (LEGACY — referencia)
+# El sitio usa GitHub Pages. Este archivo se conserva como
+# referencia de headers de seguridad si migran de hosting.
 # =============================================================
 
 [build]
