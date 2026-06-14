@@ -1,16 +1,15 @@
 # =============================================================
 # DITSÖ — Decap CMS Configuration
-# Backend: GitHub OAuth via Cloudflare Worker
+# Backend: GitHub con PKCE (sin servidor OAuth — más simple)
 # =============================================================
 
 backend:
   name: github
   repo: ditsoboutique/ditso
   branch: main
-  base_url: https://ditso-oauth.ditsoboutiquecr.workers.dev
-  auth_endpoint: /auth
+  auth_type: pkce
+  app_id: Ov23li6F4qqiRR6SZqK2
 
-# Donde se guardan las fotos subidas por el CMS
 media_folder: "assets/productos"
 public_folder: "/ditso/assets/productos"
 
@@ -18,7 +17,6 @@ locale: es
 
 collections:
 
-  # ── PRODUCTOS ──────────────────────────────────────────────
   - name: "productos"
     label: "Productos"
     label_singular: "Producto"
@@ -33,7 +31,7 @@ collections:
       - label: "ID del producto"
         name: "id"
         widget: "string"
-        hint: "Solo letras minúsculas y guiones. Ej: blusa-lino-natural. NO cambiar después de creado."
+        hint: "Solo letras minúsculas y guiones. Ej: blusa-lino-natural."
 
       - label: "Nombre del producto"
         name: "name"
@@ -78,7 +76,7 @@ collections:
         name: "image"
         widget: "image"
         required: false
-        hint: "Tamaño ideal: 800x1000px. Formato JPG o WebP. Máximo 500KB."
+        hint: "Tamaño ideal: 800x1000px. JPG o WebP. Máximo 500KB."
 
       - label: "Mostrar en sección Ofertas"
         name: "inOffer"
@@ -90,7 +88,6 @@ collections:
         widget: "boolean"
         default: true
 
-  # ── CONFIGURACIÓN DE CONTACTO ──────────────────────────────
   - name: "configuracion"
     label: "Configuracion del Sitio"
     files:
@@ -101,21 +98,17 @@ collections:
           - label: "Numero de WhatsApp"
             name: "whatsappNumber"
             widget: "string"
-            hint: "Con codigo de pais. Ej: 50685978998"
-
           - label: "Correo electronico"
             name: "storeEmail"
             widget: "string"
-
-          - label: "Mensaje de bienvenida WhatsApp"
+          - label: "Mensaje WhatsApp"
             name: "whatsappMessage"
             widget: "text"
 
-  # ── IMAGEN HERO ────────────────────────────────────────────
   - name: "hero"
     label: "Pagina de Inicio"
     files:
-      - label: "Imagen principal del sitio"
+      - label: "Imagen principal"
         name: "hero"
         file: "content/config/hero.json"
         fields:
