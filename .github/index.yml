@@ -1,0 +1,40 @@
+# =============================================================
+# DITSÖ — GitHub Action: Auto-update productos-index.json
+# Se ejecuta automáticamente cuando el CMS guarda un producto.
+# =============================================================
+
+name: Update Products Index
+
+on:
+  push:
+    paths:
+      - 'content/productos/**.json'
+      - 'content/config/**.json'
+
+jobs:
+  update-index:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Regenerate productos-index.json
+        run: |
+          python3 -c "
+          import os, json
+          files = [f.replace('.json','') for f in os.listdir('content/productos') if f.endswith('.json')]
+          files.sort()
+          with open('content/productos-index.json','w') as f:
+              json.dump(files, f, indent=2)
+          print('Index updated:', files)
+          "
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name "Ditsö Bot"
+          git config user.email "bot@ditso.cr"
+          git add content/productos-index.json
+          git diff --staged --quiet || git commit -m "Auto-update productos-index.json"
+          git push
