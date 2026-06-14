@@ -1,12 +1,12 @@
 {
-  "id": "blusa-azul",
-  "name": "Blusa azul",
-  "category": "blusas",
-  "categoryLabel": "Blusas",
-  "description": "Blusa azul",
+  "active": true,
   "price": 15000,
-  "priceOriginal": null,
-  "image": "/ditso/assets/productos/blusa_azul.jpg",
+  "name": "Blusa azul manga larga",
+  "categoryLabel": "Blusas",
   "inOffer": false,
-  "active": true
+  "priceOriginal": null,
+  "id": "blusa-azul-larga",
+  "image": "/ditso/assets/productos/blusa_azul.jpg",
+  "description": "Blusa azul manga larga",
+  "category": "blusas"
 }
