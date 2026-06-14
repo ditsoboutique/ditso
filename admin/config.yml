@@ -1,14 +1,9 @@
-# =============================================================
-# DITSÖ — Decap CMS Configuration
-# Backend: GitHub con PKCE (sin servidor OAuth — más simple)
-# =============================================================
-
 backend:
   name: github
   repo: ditsoboutique/ditso
   branch: main
-  auth_type: pkce
-  app_id: Ov23li6F4qqiRR6SZqK2
+  base_url: https://ditso-oauth.ditsoboutiquecr.workers.dev
+  auth_endpoint: /auth
 
 media_folder: "assets/productos"
 public_folder: "/ditso/assets/productos"
@@ -16,7 +11,6 @@ public_folder: "/ditso/assets/productos"
 locale: es
 
 collections:
-
   - name: "productos"
     label: "Productos"
     label_singular: "Producto"
@@ -26,17 +20,9 @@ collections:
     slug: "{{id}}"
     identifier_field: name
     summary: "{{name}} — ₡{{price}}"
-
     fields:
-      - label: "ID del producto"
-        name: "id"
-        widget: "string"
-        hint: "Solo letras minúsculas y guiones. Ej: blusa-lino-natural."
-
-      - label: "Nombre del producto"
-        name: "name"
-        widget: "string"
-
+      - { label: "ID", name: "id", widget: "string" }
+      - { label: "Nombre", name: "name", widget: "string" }
       - label: "Categoría"
         name: "category"
         widget: "select"
@@ -46,8 +32,7 @@ collections:
           - { label: "Pantalones",  value: "pantalones" }
           - { label: "Accesorios",  value: "accesorios" }
           - { label: "Ropa Cómoda", value: "ropa-comoda" }
-
-      - label: "Etiqueta de categoría"
+      - label: "Etiqueta categoría"
         name: "categoryLabel"
         widget: "select"
         options:
@@ -56,65 +41,29 @@ collections:
           - { label: "Pantalones",  value: "Pantalones" }
           - { label: "Accesorios",  value: "Accesorios" }
           - { label: "Ropa Cómoda", value: "Ropa Cómoda" }
-
-      - label: "Descripción"
-        name: "description"
-        widget: "text"
-
-      - label: "Precio (₡ colones)"
-        name: "price"
-        widget: "number"
-        value_type: "int"
-
-      - label: "Precio original (₡) — solo si está en oferta"
-        name: "priceOriginal"
-        widget: "number"
-        value_type: "int"
-        required: false
-
-      - label: "Foto del producto"
-        name: "image"
-        widget: "image"
-        required: false
-        hint: "Tamaño ideal: 800x1000px. JPG o WebP. Máximo 500KB."
-
-      - label: "Mostrar en sección Ofertas"
-        name: "inOffer"
-        widget: "boolean"
-        default: false
-
-      - label: "Visible en la tienda"
-        name: "active"
-        widget: "boolean"
-        default: true
+      - { label: "Descripción", name: "description", widget: "text" }
+      - { label: "Precio (₡)", name: "price", widget: "number", value_type: "int" }
+      - { label: "Precio original (₡)", name: "priceOriginal", widget: "number", value_type: "int", required: false }
+      - { label: "Foto", name: "image", widget: "image", required: false }
+      - { label: "En Oferta", name: "inOffer", widget: "boolean", default: false }
+      - { label: "Visible", name: "active", widget: "boolean", default: true }
 
   - name: "configuracion"
-    label: "Configuracion del Sitio"
+    label: "Configuracion"
     files:
-      - label: "WhatsApp y Contacto"
+      - label: "Contacto"
         name: "contacto"
         file: "content/config/contacto.json"
         fields:
-          - label: "Numero de WhatsApp"
-            name: "whatsappNumber"
-            widget: "string"
-          - label: "Correo electronico"
-            name: "storeEmail"
-            widget: "string"
-          - label: "Mensaje WhatsApp"
-            name: "whatsappMessage"
-            widget: "text"
+          - { label: "WhatsApp", name: "whatsappNumber", widget: "string" }
+          - { label: "Email", name: "storeEmail", widget: "string" }
+          - { label: "Mensaje WhatsApp", name: "whatsappMessage", widget: "text" }
 
   - name: "hero"
-    label: "Pagina de Inicio"
+    label: "Inicio"
     files:
       - label: "Imagen principal"
         name: "hero"
         file: "content/config/hero.json"
         fields:
-          - label: "Fotografia principal"
-            name: "heroImage"
-            widget: "image"
-            required: false
-            media_folder: "assets/hero"
-            public_folder: "/ditso/assets/hero"
+          - { label: "Foto principal", name: "heroImage", widget: "image", required: false, media_folder: "assets/hero", public_folder: "/ditso/assets/hero" }
