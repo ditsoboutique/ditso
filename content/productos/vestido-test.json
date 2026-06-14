@@ -1,0 +1,12 @@
+{
+  "id": "vestido-test",
+  "name": "Vestido Test",
+  "category": "vestidos",
+  "categoryLabel": "Vestidos",
+  "description": "Vestido color azul",
+  "price": 20994,
+  "priceOriginal": 24000,
+  "image": "/ditso/assets/productos/vestido-test.avif",
+  "inOffer": false,
+  "active": true
+}

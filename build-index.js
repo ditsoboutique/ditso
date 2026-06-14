@@ -27,7 +27,8 @@ if (!fs.existsSync(productosDir)) {
 try {
   const files = fs.readdirSync(productosDir)
     .filter(f => f.endsWith('.json'))
-    .map(f => f.replace('.json', ''));
+    .map(f => f.replace('.json', ''))
+    .sort();
 
   fs.writeFileSync(indexPath, JSON.stringify(files, null, 2), 'utf8');
 

@@ -1,0 +1,12 @@
+{
+  "id": "blusa-azul",
+  "name": "Blusa azul",
+  "category": "blusas",
+  "categoryLabel": "Blusas",
+  "description": "Blusa azul",
+  "price": 15000,
+  "priceOriginal": null,
+  "image": "/ditso/assets/productos/blusa_azul.jpg",
+  "inOffer": false,
+  "active": true
+}
