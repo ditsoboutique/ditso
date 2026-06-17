@@ -2148,23 +2148,14 @@ p {
   background-image: linear-gradient(to right, var(--color-terracotta), var(--color-gold), var(--color-olive)) !important;
 }
 
-/* Logo PNG — ajuste correcto para header y footer */
+/* Logo PNG — fondo transparente real, sin trucos de blend */
 img.logo__isotipo {
   width: 44px;
   height: 44px;
   object-fit: contain;
   display: block;
   background: transparent;
-  /* mix-blend-mode: multiply hace que el fondo blanco del PNG
-     desaparezca contra cualquier fondo claro — el oro queda intacto.
-     En el footer (fondo oscuro) se usa "screen" en su lugar. */
-  mix-blend-mode: multiply;
-}
-
-/* Footer tiene fondo oscuro — usar screen en lugar de multiply */
-.footer__brand img.logo__isotipo {
-  mix-blend-mode: screen;
-  filter: brightness(1.15);
+  filter: drop-shadow(0 1px 4px rgba(0,0,0,0.18));
 }
 
 
