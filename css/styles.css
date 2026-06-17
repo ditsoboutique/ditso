@@ -2155,8 +2155,16 @@ img.logo__isotipo {
   object-fit: contain;
   display: block;
   background: transparent;
-  /* Drop shadow sutil para que se vea bien sobre cualquier fondo */
-  filter: drop-shadow(0 1px 3px rgba(0,0,0,0.15));
+  /* mix-blend-mode: multiply hace que el fondo blanco del PNG
+     desaparezca contra cualquier fondo claro — el oro queda intacto.
+     En el footer (fondo oscuro) se usa "screen" en su lugar. */
+  mix-blend-mode: multiply;
+}
+
+/* Footer tiene fondo oscuro — usar screen en lugar de multiply */
+.footer__brand img.logo__isotipo {
+  mix-blend-mode: screen;
+  filter: brightness(1.15);
 }
 
 
