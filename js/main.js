@@ -102,21 +102,10 @@ async function loadProducts() {
 /* Lista de respaldo — mismos IDs que el índice, actualizar manualmente
    si se agregan productos nuevos antes de que el índice esté disponible. */
 async function loadProductsFallback() {
+  /* Mantener sincronizado con los archivos en content/productos/ */
   const knownIds = [
-    'blusa-lino-natural',
-    'blusa-bordada-campo',
-    'blusa-manga-campana',
     'blusa-azul',
-    'vestido-jardin',
-    'vestido-brisa-manana',
-    'vestido-siesta',
     'vestido-test',
-    'pantalon-lino-clasico',
-    'pantalon-capri-organico',
-    'panuelo-seda-floral',
-    'bolso-tejido-rafia',
-    'bata-algodon-organico',
-    'conjunto-relax-lino',
   ];
   const results = await Promise.all(knownIds.map(loadProductById));
   return results.filter(p => p !== null && p.active !== false);
