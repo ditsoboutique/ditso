@@ -81,7 +81,7 @@
           <li><a href="#inicio"    class="active">Inicio</a></li>
           <li><a href="#tienda">Tienda</a></li>
           <li><a href="#ofertas">Ofertas</a></li>
-          
+          <li><a href="#tips">Tips de Ropa</a></li>
           <li><a href="#atencion">Atención al Cliente</a></li>
           <li><a href="#sobre-ditso">Sobre Ditsö</a></li>
         </ul>
@@ -165,7 +165,7 @@
       <li><a href="#inicio">Inicio</a></li>
       <li><a href="#tienda">Tienda</a></li>
       <li><a href="#ofertas">Ofertas</a></li>
-      
+      <li><a href="#tips">Tips de Ropa</a></li>
       <li><a href="#atencion">Atención al Cliente</a></li>
       <li><a href="#sobre-ditso">Sobre Ditsö</a></li>
     </ul>
@@ -335,6 +335,40 @@
          SECCIÓN 4 — GUÍA DE TALLAS
          ══════════════════════════════════════ -->
     <!-- Guía de Tallas removida -->
+
+
+    <!-- ══════════════════════════════════════
+         SECCIÓN 4.5 — TIPS DE ROPA
+         Blog de consejos por categoría. Contenido
+         gestionado desde el CMS (content/tips/).
+         ══════════════════════════════════════ -->
+    <section id="tips" class="tips" aria-label="Tips de ropa">
+      <div class="container">
+
+        <div class="tips__header">
+          <h2 class="section-title">Tips de Ropa</h2>
+          <p class="section-subtitle">
+            Consejos prácticos para cuidar, lucir y aprovechar al máximo
+            cada prenda de su clóset.
+          </p>
+        </div>
+
+        <!-- Filtros de categoría (independientes de los filtros de Tienda) -->
+        <div class="category-filters" role="group" aria-label="Filtrar tips por categoría">
+          <button class="tip-filter-btn active" data-tip-category="todas"      aria-pressed="true">Todas</button>
+          <button class="tip-filter-btn"        data-tip-category="blusas"     aria-pressed="false">Blusas</button>
+          <button class="tip-filter-btn"        data-tip-category="vestidos"   aria-pressed="false">Vestidos</button>
+          <button class="tip-filter-btn"        data-tip-category="pantalones" aria-pressed="false">Pantalones</button>
+          <button class="tip-filter-btn"        data-tip-category="accesorios" aria-pressed="false">Accesorios</button>
+        </div>
+
+        <!-- Grid de tips — generado por JS desde content/tips/ -->
+        <div id="tips-grid" class="tips-grid" role="list" aria-label="Tips de Ditsö">
+          <!-- Los tips se insertan aquí por renderTips() en main.js -->
+        </div>
+
+      </div><!-- /container -->
+    </section>
 
 
     <!-- ══════════════════════════════════════
@@ -649,7 +683,7 @@
               <li><a href="#inicio">Inicio</a></li>
               <li><a href="#tienda">Tienda</a></li>
               <li><a href="#ofertas">Ofertas</a></li>
-              
+              <li><a href="#tips">Tips de Ropa</a></li>
               <li><a href="#atencion">Atención al Cliente</a></li>
               <li><a href="#sobre-ditso">Sobre Ditsö</a></li>
             </ul>

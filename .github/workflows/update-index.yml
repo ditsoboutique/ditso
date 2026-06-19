@@ -1,6 +1,7 @@
 # =============================================================
-# DITSÖ — GitHub Action: Auto-update productos-index.json
-# Se ejecuta cuando el CMS guarda un producto o manualmente.
+# DITSÖ — GitHub Action: Auto-update content indexes
+# Se ejecuta cuando el CMS guarda un producto o un tip,
+# o manualmente desde la pestaña Actions.
 # =============================================================
 
 name: Update Products Index
@@ -10,6 +11,7 @@ on:
     branches: [main]
     paths:
       - 'content/productos/**'
+      - 'content/tips/**'
   workflow_dispatch:
 
 permissions:
@@ -27,17 +29,17 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Regenerate productos-index.json
+      - name: Regenerate index files (productos + tips)
         run: node build-index.js
 
       - name: Commit and push if changed
         run: |
           git config user.name "Ditsö Bot"
           git config user.email "bot@ditso.cr"
-          git add content/productos-index.json
+          git add content/productos-index.json content/tips-index.json
           if git diff --staged --quiet; then
-            echo "Index already up to date."
+            echo "Indexes already up to date."
           else
-            git commit -m "Auto-update productos-index.json"
+            git commit -m "Auto-update content indexes"
             git push
           fi
