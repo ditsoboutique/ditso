@@ -2240,3 +2240,32 @@ img.logo__isotipo {
 /* localStorage fallback — si está bloqueado (Safari privado),
    el toggle de fuente simplemente no persiste entre visitas.
    No es un error crítico — ver main.js try/catch. */
+
+/* ══════════════════════════════════════════════════════════
+   PHASE 1 — COMPRAS DESACTIVADAS
+   Ocultar todos los elementos de compra y carrito.
+   El código JS/HTML permanece intacto.
+
+   ✅ Para activar Phase 2: eliminar este bloque completo.
+   ══════════════════════════════════════════════════════════ */
+
+/* Ícono de carrito en el header */
+.cart-btn,
+.cart-badge {
+  display: none !important;
+}
+
+/* Botones "Ver Detalles" y "Agregar al Carrito" en tarjetas de producto */
+.product-card__actions {
+  display: none !important;
+}
+
+/* Botón "Consultar por WhatsApp" en tarjetas de oferta (acción de compra) */
+.oferta-card .btn-whatsapp {
+  display: none !important;
+}
+
+/* Modal de carrito/producto */
+#cart-modal-overlay {
+  display: none !important;
+}
