@@ -150,6 +150,28 @@ async function loadHeroImage() {
   }
 }
 
+/* Carga un tip individual desde content/tips/{id}.json */
+async function loadTipById(id) {
+  const res = await fetch(contentUrl(`content/tips/${id}.json`));
+  if (!res.ok) return null;
+  return res.json();
+}
+
+/* Carga todos los tips listados en content/tips-index.json
+   (generado automáticamente por build-index.js / GitHub Action) */
+async function loadTips() {
+  try {
+    const indexRes = await fetch(contentUrl('content/tips-index.json'));
+    if (!indexRes.ok) throw new Error('Tips index not found');
+    const index = await indexRes.json();
+    const results = await Promise.all(index.map(loadTipById));
+    return results.filter(t => t !== null && t.active !== false);
+  } catch {
+    console.warn('Ditsö: tips-index.json no encontrado. Sección Tips vacía.');
+    return [];
+  }
+}
+
 
 /* ═══════════════════════════════════════════════
    3. MÓDULO: NAVEGACIÓN
@@ -405,6 +427,82 @@ function initCategoryFilters() {
   });
 }
 
+/* ═══════════════════════════════════════════════
+   5.5 MÓDULO: TIPS DE ROPA — Render y Filtro
+   Mismo patrón que el catálogo, pero independiente
+   (clases .tip-* propias) para no interferir con
+   los filtros y tarjetas de la Tienda.
+   ═══════════════════════════════════════════════ */
+function buildTipCard(tip) {
+  const safeTitle = sanitize(tip.title);
+  const safeText  = sanitize(tip.text);
+  const safeCat   = sanitize(tip.category || 'general');
+  const safeLabel = sanitize(tip.categoryLabel || '');
+
+  const imagePart = tip.image
+    ? `<img src="${sanitize(resolveAssetUrl(tip.image))}" alt="${safeTitle}" loading="lazy" decoding="async">`
+    : `<div class="tip-card__image-placeholder" aria-hidden="true">
+         ${getLeafSVG(48)}
+         <span>Foto próximamente</span>
+       </div>`;
+
+  return `
+    <article class="tip-card" data-category="${safeCat}" role="listitem">
+      <div class="tip-card__image">
+        ${imagePart}
+        ${safeLabel ? `<span class="tip-card__category-badge">${safeLabel}</span>` : ''}
+      </div>
+      <div class="tip-card__body">
+        <h3 class="tip-card__title">${safeTitle}</h3>
+        <p class="tip-card__text">${safeText}</p>
+      </div>
+    </article>`;
+}
+
+/* Renderiza los tips en el grid. Acepta el array ya cargado. */
+function renderTips(tips) {
+  const grid = document.getElementById('tips-grid');
+  if (!grid) return;
+
+  if (tips.length === 0) {
+    grid.innerHTML = `<p style="text-align:center; color: var(--color-text-secondary); padding: var(--space-xl) 0; grid-column: 1/-1;">
+      Aún no hay tips publicados. ¡Vuelva pronto!
+    </p>`;
+  } else {
+    grid.innerHTML = tips.map(buildTipCard).join('');
+  }
+
+  initTipCategoryFilters();
+}
+
+function initTipCategoryFilters() {
+  const filterBtns = document.querySelectorAll('.tip-filter-btn');
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const cat = btn.dataset.tipCategory;
+      filterBtns.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-pressed', 'false'); });
+      btn.classList.add('active');
+      btn.setAttribute('aria-pressed', 'true');
+      /* Re-query en cada click — seguro para carga async */
+      document.querySelectorAll('.tip-card').forEach(card => {
+        card.style.display = (cat === 'todas' || card.dataset.category === cat) ? '' : 'none';
+      });
+    });
+  });
+}
+
+/* Muestra un mensaje mientras cargan los tips */
+function showTipsLoadingState() {
+  const grid = document.getElementById('tips-grid');
+  if (grid) {
+    grid.innerHTML = `
+      <div style="grid-column: 1/-1; text-align: center; padding: var(--space-xl) 0; color: var(--color-text-secondary);">
+        <div style="font-size: 48px; margin-bottom: var(--space-sm);">🌿</div>
+        <p style="font-size: var(--text-md);">Cargando tips...</p>
+      </div>`;
+  }
+}
+
 /* Muestra un spinner mientras cargan los productos */
 function showLoadingState() {
   const grid = document.getElementById('products-grid');
@@ -536,11 +634,13 @@ document.addEventListener('DOMContentLoaded', async () => {
   initFAQ();
   initScrollActiveNav();
   showLoadingState();
+  showTipsLoadingState();
 
-  /* Cargar config y productos en paralelo */
-  const [, products] = await Promise.all([
+  /* Cargar config, productos y tips en paralelo */
+  const [, products, tips] = await Promise.all([
     loadConfig(),
     loadProducts(),
+    loadTips(),
   ]);
 
   /* Actualizar todos los enlaces de WhatsApp con el número real del CMS */
@@ -555,6 +655,9 @@ document.addEventListener('DOMContentLoaded', async () => {
   /* Renderizar catálogo con los productos del CMS */
   renderCatalog(products);
 
+  /* Renderizar tips de ropa con el contenido del CMS */
+  renderTips(tips);
+
   /* Inicializar modal después de que el DOM está listo */
   modalOverlay.init();
 
@@ -563,6 +666,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     'color: #D4B434; font-weight: bold; font-size: 14px;'
   );
   console.info(`  Productos cargados: ${products.length}`);
+  console.info(`  Tips cargados: ${tips.length}`);
   console.info(`  WhatsApp: ${CONFIG.whatsappNumber}`);
   console.info(`  Panel admin: ${contentUrl('admin/')}`);
 });

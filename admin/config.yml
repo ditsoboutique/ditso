@@ -72,3 +72,37 @@ collections:
         file: "content/config/hero.json"
         fields:
           - { label: "Foto principal", name: "heroImage", widget: "image", required: false, media_folder: "assets/hero", public_folder: "/ditso/assets/hero" }
+  - name: "tips"
+    label: "Tips de Ropa"
+    label_singular: "Tip"
+    folder: "content/tips"
+    format: json
+    extension: json
+    create: true
+    delete: true
+    slug: "{{slug}}"
+    identifier_field: title
+    summary: "{{title}} — {{categoryLabel}}"
+    media_folder: "assets/tips"
+    public_folder: "/ditso/assets/tips"
+    fields:
+      - { label: "Título", name: "title", widget: "string" }
+      - label: "Categoría"
+        name: "category"
+        widget: "select"
+        options:
+          - { label: "Blusas",      value: "blusas" }
+          - { label: "Vestidos",    value: "vestidos" }
+          - { label: "Pantalones",  value: "pantalones" }
+          - { label: "Accesorios",  value: "accesorios" }
+      - label: "Etiqueta categoría"
+        name: "categoryLabel"
+        widget: "select"
+        options:
+          - { label: "Blusas",      value: "Blusas" }
+          - { label: "Vestidos",    value: "Vestidos" }
+          - { label: "Pantalones",  value: "Pantalones" }
+          - { label: "Accesorios",  value: "Accesorios" }
+      - { label: "Texto del tip", name: "text", widget: "text" }
+      - { label: "Foto (opcional)", name: "image", widget: "image", required: false }
+      - { label: "Visible", name: "active", widget: "boolean", default: true }
