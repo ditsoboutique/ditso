@@ -176,6 +176,40 @@ async function loadTips() {
 /* ═══════════════════════════════════════════════
    3. MÓDULO: NAVEGACIÓN
    ═══════════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════
+   MÓDULO: REVEAL ANIMATIONS
+   Fade + slide up al hacer scroll.
+   ═══════════════════════════════════════════════ */
+let _revealObserver = null;
+
+function getRevealObserver() {
+  if (_revealObserver) return _revealObserver;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return null;
+  _revealObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('reveal--visible');
+        _revealObserver.unobserve(entry.target);
+      });
+    },
+    { threshold: 0.10, rootMargin: '0px 0px -40px 0px' }
+  );
+  return _revealObserver;
+}
+
+function observeRevealElements() {
+  const obs = getRevealObserver();
+  if (!obs) {
+    document.querySelectorAll('.reveal').forEach(el => el.classList.add('reveal--visible'));
+    return;
+  }
+  document.querySelectorAll('.reveal:not([data-rv])').forEach(el => {
+    el.dataset.rv = '1';
+    obs.observe(el);
+  });
+}
+
 function initNavigation() {
   const hamburger  = document.getElementById('hamburger');
   const mobileNav  = document.getElementById('mobile-nav');
@@ -260,7 +294,7 @@ function getLeafSVG(size = 56) {
   </svg>`;
 }
 
-function buildProductCard(product) {
+function buildProductCard(product, cardIndex = 0) {
   const hasDiscount = product.priceOriginal && product.priceOriginal > product.price;
   const discountPct = hasDiscount ? Math.round((1 - product.price / product.priceOriginal) * 100) : 0;
 
@@ -289,7 +323,7 @@ function buildProductCard(product) {
   const nameEsc = product.name.replace(/'/g, "\\'");
 
   return `
-    <article class="product-card" data-category="${safeCat}" data-id="${safeId}" role="listitem">
+    <article class="product-card reveal" data-category="${safeCat}" data-id="${safeId}" role="listitem" style="transition-delay:${Math.min(cardIndex*80,320)}ms">
       <div class="product-card__image">
         ${imagePart}
         <span class="product-card__category-badge">${safeLabel}</span>
@@ -372,7 +406,7 @@ function renderCatalog(products) {
         No hay productos disponibles en este momento. Contáctenos por WhatsApp.
       </p>`;
     } else {
-      grid.innerHTML = products.map(buildProductCard).join('');
+      grid.innerHTML = products.map((p, i) => buildProductCard(p, i)).join('');
     }
   }
 
@@ -386,6 +420,7 @@ function renderCatalog(products) {
 
   /* Inicializar filtros DESPUÉS de renderizar las tarjetas */
   initCategoryFilters();
+  observeRevealElements();
 
   /* Delegar eventos de botones — sin onclick inline (seguridad) */
   initProductButtons();
@@ -433,7 +468,7 @@ function initCategoryFilters() {
    (clases .tip-* propias) para no interferir con
    los filtros y tarjetas de la Tienda.
    ═══════════════════════════════════════════════ */
-function buildTipCard(tip) {
+function buildTipCard(tip, cardIndex = 0) {
   const safeTitle = sanitize(tip.title);
   const safeText  = sanitize(tip.text);
   const safeCat   = sanitize(tip.category || 'general');
@@ -447,7 +482,7 @@ function buildTipCard(tip) {
        </div>`;
 
   return `
-    <article class="tip-card" data-category="${safeCat}" role="listitem">
+    <article class="tip-card reveal" data-category="${safeCat}" role="listitem" style="transition-delay:${Math.min(cardIndex*80,320)}ms">
       <div class="tip-card__image">
         ${imagePart}
         ${safeLabel ? `<span class="tip-card__category-badge">${safeLabel}</span>` : ''}
@@ -469,10 +504,11 @@ function renderTips(tips) {
       Aún no hay tips publicados. ¡Vuelva pronto!
     </p>`;
   } else {
-    grid.innerHTML = tips.map(buildTipCard).join('');
+    grid.innerHTML = tips.map((t, i) => buildTipCard(t, i)).join('');
   }
 
   initTipCategoryFilters();
+  observeRevealElements();
 }
 
 function initTipCategoryFilters() {
@@ -635,6 +671,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   initScrollActiveNav();
   showLoadingState();
   showTipsLoadingState();
+  observeRevealElements();   /* static HTML reveals */
 
   /* Cargar config, productos y tips en paralelo */
   const [, products, tips] = await Promise.all([
