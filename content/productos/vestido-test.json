@@ -5,8 +5,7 @@
   "categoryLabel": "Vestidos",
   "inOffer": false,
   "priceOriginal": 24000,
-  "id": "vestido-rojo-gala",
   "image": "/ditso/assets/productos/vestido-test.avif",
-  "description": "Vestido Rojo Gala",
-  "category": "vestidos"
+  "inOffer": false,
+  "active": true
 }

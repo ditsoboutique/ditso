@@ -6,7 +6,7 @@ backend:
   auth_endpoint: /auth
 
 media_folder: "assets/productos"
-public_folder: "/ditso/assets/productos"
+public_folder: "assets/productos"
 
 locale: es
 
@@ -71,7 +71,7 @@ collections:
         name: "hero"
         file: "content/config/hero.json"
         fields:
-          - { label: "Foto principal", name: "heroImage", widget: "image", required: false, media_folder: "assets/hero", public_folder: "/ditso/assets/hero" }
+          - { label: "Foto principal", name: "heroImage", widget: "image", required: false, media_folder: "assets/hero", public_folder: "assets/hero" }
   - name: "tips"
     label: "Tips de Ropa"
     label_singular: "Tip"
@@ -84,7 +84,7 @@ collections:
     identifier_field: title
     summary: "{{title}} — {{categoryLabel}}"
     media_folder: "assets/tips"
-    public_folder: "/ditso/assets/tips"
+    public_folder: "assets/tips"
     fields:
       - { label: "Título", name: "title", widget: "string" }
       - label: "Categoría"
