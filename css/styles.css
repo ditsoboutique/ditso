@@ -2269,3 +2269,37 @@ img.logo__isotipo {
 #cart-modal-overlay {
   display: none !important;
 }
+
+/* ══════════════════════════════════════════════════════════
+   REVEAL ANIMATIONS — Fade + slide up on scroll
+   Activado por IntersectionObserver en main.js.
+
+   Sólo aplica si el usuario NO ha solicitado movimiento
+   reducido (prefers-reduced-motion: no-preference).
+   En caso contrario, los elementos aparecen normalmente
+   sin ninguna animación — accesibilidad garantizada.
+
+   Para desactivar completamente: eliminar este bloque
+   y la llamada a initRevealAnimations() en main.js.
+   ══════════════════════════════════════════════════════════ */
+@media (prefers-reduced-motion: no-preference) {
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .reveal--visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Delays para escalonar elementos dentro de una misma sección */
+  .reveal--d1 { transition-delay: 0.08s; }
+  .reveal--d2 { transition-delay: 0.16s; }
+  .reveal--d3 { transition-delay: 0.24s; }
+  .reveal--d4 { transition-delay: 0.32s; }
+  .reveal--d5 { transition-delay: 0.40s; }
+}
