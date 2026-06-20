@@ -1,12 +1,12 @@
 {
-  "id": "vestido-test",
-  "name": "Vestido Test",
-  "category": "vestidos",
-  "categoryLabel": "Vestidos",
-  "description": "Vestido color azul",
+  "active": true,
   "price": 20994,
-  "priceOriginal": 24000,
-  "image": "/ditso/assets/productos/vestido-test.avif",
+  "name": "Vestido Rojo Gala",
+  "categoryLabel": "Vestidos",
   "inOffer": false,
-  "active": true
+  "priceOriginal": 24000,
+  "id": "vestido-rojo-gala",
+  "image": "assets/productos/vestido-test.avif",
+  "description": "Vestido Rojo Gala",
+  "category": "vestidos"
 }
