@@ -2303,37 +2303,3 @@ img.logo__isotipo {
   .reveal--d4 { transition-delay: 0.32s; }
   .reveal--d5 { transition-delay: 0.40s; }
 }
-
-/* ══════════════════════════════════════════════════════════
-   WAVE DIVIDERS — Transiciones suaves entre secciones
-   Elementos SVG posicionados entre secciones con alto
-   contraste de color (Tienda→Ofertas y Ofertas→Tips).
-   No usan pseudo-elementos para evitar conflictos con
-   reglas existentes de .tienda::after y .ofertas::before.
-   ══════════════════════════════════════════════════════════ */
-.wave-divider {
-  display: block;
-  line-height: 0;           /* elimina espacio extra bajo el SVG */
-  overflow: hidden;
-  margin-top: -2px;         /* solapa 2px para evitar línea blanca entre sección y ola */
-  margin-bottom: -2px;
-  pointer-events: none;
-  user-select: none;
-}
-
-.wave-divider svg {
-  display: block;
-  width: 100%;
-  height: 64px;
-}
-
-/* En pantallas muy anchas, la ola puede verse estirada.
-   Aumentamos la altura para que siga luciendo natural. */
-@media (min-width: 1600px) {
-  .wave-divider svg { height: 80px; }
-}
-
-/* En móvil reducimos la altura para no tomar tanto espacio */
-@media (max-width: 640px) {
-  .wave-divider svg { height: 40px; }
-}
