@@ -1,3 +1,15 @@
+/* ── NON-BLOCKING FONTS ────────────────────────────────────
+   Activa el preload de Google Fonts sin bloquear el render.
+   Corre inmediatamente al cargar el script (bottom of body),
+   cuando el HTML ya fue pintado con fuentes del sistema.
+   display=swap en la URL garantiza que el texto sea visible
+   siempre — con o sin la fuente personalizada cargada.
+   ──────────────────────────────────────────────────────── */
+(function activateFonts() {
+  const preload = document.querySelector('link[rel="preload"][as="style"]');
+  if (preload) preload.rel = 'stylesheet';
+})();
+
 /**
  * DITSÖ — JavaScript Principal
  * Versión: 2.0 (Phase 1 + Decap CMS)
