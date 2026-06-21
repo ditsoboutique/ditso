@@ -101,10 +101,18 @@
   <!-- Fuentes Google -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,700;1,6..96,400&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Fuentes: preload descarga sin bloquear render.
+       main.js activa el stylesheet una vez que el HTML ya fue pintado.
+       <noscript> es el fallback para navegadores sin JS. -->
+  <link rel="preload"
+        href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,700;1,6..96,400&family=Montserrat:wght@400;500;600;700&display=swap"
+        as="style">
+  <noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,700;1,6..96,400&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  </noscript>
 
   <!-- Estilos principales -->
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/styles.min.css">
 </head>
 
 <body>
@@ -883,7 +891,7 @@
   </a>
 
   <!-- Script principal -->
-  <script src="js/main.js"></script>
+  <script src="js/main.min.js"></script>
 
 </body>
 </html>
