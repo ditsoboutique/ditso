@@ -1,0 +1,26 @@
+[
+  {
+    "active": true,
+    "price": 15000,
+    "name": "Blusa azul manga larga",
+    "categoryLabel": "Blusas",
+    "inOffer": false,
+    "priceOriginal": null,
+    "id": "blusa-azul-larga",
+    "image": "assets/productos/blusa_azul.jpg",
+    "description": "Blusa azul manga larga",
+    "category": "blusas"
+  },
+  {
+    "active": true,
+    "price": 20994,
+    "name": "Vestido Rojo Gala",
+    "categoryLabel": "Vestidos",
+    "inOffer": false,
+    "priceOriginal": 24000,
+    "id": "vestido-rojo-gala",
+    "image": "assets/productos/vestido-test.avif",
+    "description": "Vestido Rojo Gala",
+    "category": "vestidos"
+  }
+]

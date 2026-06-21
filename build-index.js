@@ -45,3 +45,37 @@ function buildIndex(folderName, indexFileName) {
 
 buildIndex('productos', 'productos-index.json');
 buildIndex('tips',      'tips-index.json');
+
+/* ── BUNDLE: genera un único JSON con todos los productos y tips
+   Esto permite al sitio hacer 1 sola request en lugar de N+1
+   (un fetch por cada producto individualmente). ── */
+function buildBundle(folderName, bundleFileName) {
+  const dir        = path.join(__dirname, 'content', folderName);
+  const bundlePath = path.join(__dirname, 'content', bundleFileName);
+
+  if (!fs.existsSync(dir)) return;
+
+  try {
+    const items = fs.readdirSync(dir)
+      .filter(f => f.endsWith('.json'))
+      .sort()
+      .map(f => {
+        try {
+          return JSON.parse(fs.readFileSync(path.join(dir, f), 'utf8'));
+        } catch {
+          console.warn(`  ⚠ Could not parse ${f}, skipping.`);
+          return null;
+        }
+      })
+      .filter(Boolean);
+
+    fs.writeFileSync(bundlePath, JSON.stringify(items, null, 2), 'utf8');
+    console.log(`✓ ${bundleFileName} generado con ${items.length} entradas.`);
+  } catch (err) {
+    console.error(`Error generando ${bundleFileName}:`, err.message);
+    process.exitCode = 1;
+  }
+}
+
+buildBundle('productos', 'productos-bundle.json');
+buildBundle('tips',      'tips-bundle.json');

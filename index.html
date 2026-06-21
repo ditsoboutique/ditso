@@ -39,11 +39,64 @@
   <!-- No enviar Referer al navegar a sitios externos (privacidad) -->
   <meta name="referrer" content="strict-origin-when-cross-origin">
 
-  <!-- Open Graph / redes sociales -->
+  <!-- Canonical — evita penalización por contenido duplicado en Google -->
+  <link rel="canonical" href="https://ditsoboutique.github.io/ditso/">
+
+  <!-- Robots — autorizar indexación -->
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph / redes sociales (WhatsApp, Facebook, etc.) -->
   <meta property="og:type"        content="website">
+  <meta property="og:url"         content="https://ditsoboutique.github.io/ditso/">
   <meta property="og:title"       content="Ditsö — Ropa para la Mujer Costarricense">
   <meta property="og:description" content="Ropa fresca y cómoda para la mujer que es la semilla de todo. Marca costarricense con raíces Bribri.">
   <meta property="og:locale"      content="es_CR">
+  <meta property="og:image"       content="https://ditsoboutique.github.io/ditso/assets/brand/logo.png">
+  <meta property="og:image:alt"   content="Ditsö — Marca de ropa costarricense">
+  <meta property="og:site_name"   content="Ditsö">
+
+  <!-- Twitter / X card -->
+  <meta name="twitter:card"        content="summary">
+  <meta name="twitter:title"       content="Ditsö — Ropa para la Mujer Costarricense">
+  <meta name="twitter:description" content="Ropa fresca y cómoda para la mujer que es la semilla de todo. Marca costarricense con raíces Bribri.">
+  <meta name="twitter:image"       content="https://ditsoboutique.github.io/ditso/assets/brand/logo.png">
+
+  <!-- Schema.org — le dice a Google exactamente qué es este sitio.
+       Activa "rich results" en búsquedas: horarios, ubicación, reseñas. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ClothingStore",
+    "name": "Ditsö",
+    "description": "Marca costarricense de ropa fresca y cómoda para la mujer. Blusas, vestidos, pantalones y accesorios con materiales naturales.",
+    "url": "https://ditsoboutique.github.io/ditso/",
+    "logo": "https://ditsoboutique.github.io/ditso/assets/brand/logo.png",
+    "image": "https://ditsoboutique.github.io/ditso/assets/brand/logo.png",
+    "telephone": "+50685978998",
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "CR",
+      "addressRegion": "Costa Rica"
+    },
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+50685978998",
+      "contactType": "customer service",
+      "availableLanguage": "Spanish",
+      "contactOption": "TollFree"
+    },
+    "sameAs": [
+      "https://wa.me/50685978998"
+    ],
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
+      "opens": "08:00",
+      "closes": "18:00"
+    },
+    "priceRange": "₡₡"
+  }
+  </script>
 
   <!-- Fuentes Google -->
   <link rel="preconnect" href="https://fonts.googleapis.com">

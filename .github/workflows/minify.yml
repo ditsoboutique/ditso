@@ -1,0 +1,63 @@
+# =============================================================
+# DITSÖ — GitHub Action: Minify CSS and JS
+# Se ejecuta al hacer push a main de los archivos fuente.
+# Genera versiones minificadas (.min.css / .min.js) y actualiza
+# las referencias en index.html automáticamente.
+# =============================================================
+
+name: Minify CSS and JS
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'css/styles.css'
+      - 'js/main.js'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  minify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install minifiers
+        run: npm install -g csso-cli terser
+
+      - name: Minify CSS
+        run: |
+          csso css/styles.css --output css/styles.min.css
+          echo "CSS: $(wc -c < css/styles.css) bytes → $(wc -c < css/styles.min.css) bytes"
+
+      - name: Minify JS
+        run: |
+          terser js/main.js \
+            --compress --mangle \
+            --output js/main.min.js
+          echo "JS: $(wc -c < js/main.js) bytes → $(wc -c < js/main.min.js) bytes"
+
+      - name: Update index.html to use minified files
+        run: |
+          sed -i 's|href="css/styles.css"|href="css/styles.min.css"|g' index.html
+          sed -i 's|src="js/main.js"|src="js/main.min.js"|g' index.html
+
+      - name: Commit minified files
+        run: |
+          git config user.name "Ditsö Bot"
+          git config user.email "bot@ditso.cr"
+          git add css/styles.min.css js/main.min.js index.html
+          if git diff --staged --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "Auto-minify CSS and JS"
+            git push
+          fi

@@ -75,40 +75,39 @@ function resolveAssetUrl(path) {
  *
  * NOTA: En un servidor estático (Netlify/GitHub Pages) no podemos
  * listar directorios. Por eso mantenemos un índice en
- * content/productos-index.json que lista los IDs disponibles.
- * El CMS lo actualiza automáticamente vía el script de build.
+ * productos-bundle.json (un solo fetch con todos los productos).
+ * Si el bundle no existe, cae de vuelta al índice individual (compatibilidad).
+ * El CMS regenera ambos automáticamente vía el GitHub Action de build.
  */
-async function loadProductById(id) {
-  const res = await fetch(contentUrl(`content/productos/${id}.json`));
-  if (!res.ok) return null;
-  return res.json();
-}
 
+/* ── ESTRATEGIA: 1 fetch en lugar de N+1 ──
+   Bundle: 1 request → todos los productos de una vez.
+   Fallback: índice + fetches individuales (para desarrollo local). */
 async function loadProducts() {
+  /* Intentar bundle primero — más rápido, 1 sola request */
+  try {
+    const res = await fetch(contentUrl('content/productos-bundle.json'));
+    if (res.ok) {
+      const products = await res.json();
+      return products.filter(p => p && p.active !== false);
+    }
+  } catch { /* bundle no disponible aún, usar fallback */ }
+
+  /* Fallback: índice + fetches individuales */
   try {
     const indexRes = await fetch(contentUrl('content/productos-index.json'));
     if (!indexRes.ok) throw new Error('Index not found');
     const index = await indexRes.json();
-
-    const results = await Promise.all(index.map(loadProductById));
+    const results = await Promise.all(
+      index.map(id => fetch(contentUrl(`content/productos/${id}.json`))
+        .then(r => r.ok ? r.json() : null)
+        .catch(() => null))
+    );
     return results.filter(p => p !== null && p.active !== false);
-
   } catch {
-    console.warn('Ditsö: productos-index.json no encontrado. Usando lista de respaldo.');
-    return loadProductsFallback();
+    console.warn('Ditsö: No se pudo cargar productos. Usando lista de respaldo.');
+    return []; /* lista vacía — mejor que datos incorrectos */
   }
-}
-
-/* Lista de respaldo — mismos IDs que el índice, actualizar manualmente
-   si se agregan productos nuevos antes de que el índice esté disponible. */
-async function loadProductsFallback() {
-  /* Mantener sincronizado con los archivos en content/productos/ */
-  const knownIds = [
-    'blusa-azul',
-    'vestido-test',
-  ];
-  const results = await Promise.all(knownIds.map(loadProductById));
-  return results.filter(p => p !== null && p.active !== false);
 }
 
 /* Carga la configuración de contacto desde el JSON del CMS */
@@ -150,21 +149,27 @@ async function loadHeroImage() {
   }
 }
 
-/* Carga un tip individual desde content/tips/{id}.json */
-async function loadTipById(id) {
-  const res = await fetch(contentUrl(`content/tips/${id}.json`));
-  if (!res.ok) return null;
-  return res.json();
-}
-
-/* Carga todos los tips listados en content/tips-index.json
-   (generado automáticamente por build-index.js / GitHub Action) */
+/* Carga todos los tips — bundle primero, fallback individual */
 async function loadTips() {
+  /* Intentar bundle primero */
+  try {
+    const res = await fetch(contentUrl('content/tips-bundle.json'));
+    if (res.ok) {
+      const tips = await res.json();
+      return tips.filter(t => t && t.active !== false);
+    }
+  } catch { /* bundle no disponible aún */ }
+
+  /* Fallback: índice + fetches individuales */
   try {
     const indexRes = await fetch(contentUrl('content/tips-index.json'));
     if (!indexRes.ok) throw new Error('Tips index not found');
     const index = await indexRes.json();
-    const results = await Promise.all(index.map(loadTipById));
+    const results = await Promise.all(
+      index.map(id => fetch(contentUrl(`content/tips/${id}.json`))
+        .then(r => r.ok ? r.json() : null)
+        .catch(() => null))
+    );
     return results.filter(t => t !== null && t.active !== false);
   } catch {
     console.warn('Ditsö: tips-index.json no encontrado. Sección Tips vacía.');
