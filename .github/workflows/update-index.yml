@@ -36,10 +36,10 @@ jobs:
         run: |
           git config user.name "Ditsö Bot"
           git config user.email "bot@ditso.cr"
-          git add content/productos-index.json content/tips-index.json
+          git add content/productos-index.json content/tips-index.json                   content/productos-bundle.json content/tips-bundle.json
           if git diff --staged --quiet; then
-            echo "Indexes already up to date."
+            echo "Indexes and bundles already up to date."
           else
-            git commit -m "Auto-update content indexes"
+            git commit -m "Auto-update content indexes and bundles"
             git push
           fi

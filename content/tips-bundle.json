@@ -1,0 +1,26 @@
+[
+  {
+    "title": "Cómo combinar blusas de lino en el clima tropical",
+    "category": "blusas",
+    "categoryLabel": "Blusas",
+    "text": "Las blusas de lino son perfectas para el calor costarricense porque permiten que la piel respire. Para un look fresco y elegante, combínelas con un pantalón oscuro de tiro alto. Evite la secadora — séquelas a la sombra para conservar su forma y suavidad. Un truco sencillo: si quedan arrugadas, cuélguelas en el baño mientras se ducha; el vapor las alisa sin necesidad de plancha.",
+    "image": "",
+    "active": true
+  },
+  {
+    "title": "Vestidos cómodos para cada ocasión del día",
+    "category": "vestidos",
+    "categoryLabel": "Vestidos",
+    "text": "Un vestido midi de algodón puede pasar de una visita familiar a una salida al mercado con solo cambiar los accesorios. Por la mañana, llévelo suelto con sandalias planas. Para la tarde, agréguele un cinturón suave en tono dorado o terracota. El secreto está en elegir colores neutros — crema, oliva, marfil — que combinan con todo y lucen siempre frescos y apropiados.",
+    "image": "",
+    "active": true
+  },
+  {
+    "title": "Tres accesorios que elevan cualquier conjunto",
+    "category": "accesorios",
+    "categoryLabel": "Accesorios",
+    "text": "No se necesitan muchos accesorios para lucir bien — basta con los correctos. Un pañuelo de seda anudado en la muñeca o al cuello añade color y elegancia sin esfuerzo. Un bolso tejido artesanal le da personalidad a cualquier blusa sencilla. Y un par de aretes medianos en tonos dorados o de madera natural completan el look sin competir con la ropa. Menos es más.",
+    "image": "",
+    "active": true
+  }
+]
