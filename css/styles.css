@@ -1174,7 +1174,7 @@ p {
    9. OFERTAS / NOVEDADES
    ───────────────────────────────────────────── */
 .ofertas {
-  background: var(--bg-olive);
+  background: var(--bg-section-alt);
   padding: var(--space-xl) 0;
   position: relative;
   overflow: hidden;
