@@ -1,0 +1,11 @@
+{
+  "active": true,
+  "price": 10000,
+  "name": "pantalon liso",
+  "categoryLabel": "Blusas",
+  "inOffer": false,
+  "id": "b00012",
+  "image": "assets/productos/pantalon-chino.webp",
+  "description": "pantalon X",
+  "category": "pantalones"
+}
