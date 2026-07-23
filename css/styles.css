@@ -33,8 +33,8 @@
   --color-gold:        #D4B434;   /* Oro Ditsö — acentos, CTAs, lujo */
   --color-gold-dark:   #B89A20;   /* Oro oscuro para hover */
   --color-graphite:    #333333;   /* Carbón Suave — texto principal */
-  --color-cream:       #FFFFCC;   /* Marfil Orgánico — fondo principal */
-  --color-cream-dark:  #F5F0A8;   /* Marfil oscuro — hover, alt secciones */
+  --color-cream:       #FFFFFF;   /* Marfil Orgánico — fondo principal */
+  --color-cream-dark:  #F0F0F0;   /* Marfil oscuro — hover, alt secciones */
   --color-olive:       #556525;   /* Esencia Natural — acento secciones */
   --color-olive-light: #6E8030;   /* Oliva claro */
   --color-terracotta:  #804020;   /* Tierra — acento Costa Rica */
@@ -48,8 +48,8 @@
   --color-text-muted:     #777777;
 
   /* Fondos de sección */
-  --bg-main:        #FFFFCC;
-  --bg-section-alt: #F5F0B0;
+  --bg-main:        #FFFFFF;
+  --bg-section-alt: #F5F5F5;
   --bg-olive:       #3D4A1A;
   --bg-terracotta:  #6B3318;
 
