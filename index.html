@@ -6,9 +6,9 @@
   <meta name="theme-color" content="#FFFFCC">
 
   <!-- SEO -->
-  <title>Ditsö — Ropa Orgánica para la Mujer Costarricense</title>
-  <meta name="description" content="Ditsö es una marca costarricense de ropa orgánica, fresca y cómoda para la mujer que es la semilla de todo. Blusas, vestidos, pantalones y accesorios con materiales naturales.">
-  <meta name="keywords" content="ropa mujer Costa Rica, ropa orgánica, ropa cómoda, mujeres mayores, Ditsö, Bribri, moda costarricense">
+  <title>Ditsö — Ropa para la Mujer Costarricense</title>
+  <meta name="description" content="Ditsö es una marca costarricense de ropa, fresca y cómoda para la mujer que es la semilla de todo. Blusas, vestidos, pantalones y accesorios con materiales naturales.">
+  <meta name="keywords" content="ropa mujer Costa Rica, ropa cómoda, mujeres mayores, Ditsö, Bribri, moda costarricense">
   <meta name="author" content="Ditsö">
 
   <!-- Seguridad — HTTP Security Headers vía meta tags
@@ -39,19 +39,78 @@
   <!-- No enviar Referer al navegar a sitios externos (privacidad) -->
   <meta name="referrer" content="strict-origin-when-cross-origin">
 
+  <!-- Base URL — dominio propio -->
+  <base href="/">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://ditsoboutiquecr.com/">
+
+  <!-- Robots -->
+  <meta name="robots" content="index, follow">
+
   <!-- Open Graph / redes sociales -->
   <meta property="og:type"        content="website">
-  <meta property="og:title"       content="Ditsö — Ropa Orgánica para la Mujer Costarricense">
-  <meta property="og:description" content="Ropa orgánica, fresca y cómoda para la mujer que es la semilla de todo. Marca costarricense con raíces Bribri.">
+  <meta property="og:url"         content="https://ditsoboutiquecr.com/">
+  <meta property="og:title"       content="Ditsö — Ropa para la Mujer Costarricense">
+  <meta property="og:description" content="Ropa fresca y cómoda para la mujer que es la semilla de todo. Marca costarricense con raíces Bribri.">
   <meta property="og:locale"      content="es_CR">
+  <meta property="og:image"       content="https://ditsoboutiquecr.com/assets/brand/logo.png">
+  <meta property="og:image:alt"   content="Ditsö — Marca de ropa costarricense">
+  <meta property="og:site_name"   content="Ditsö">
+
+  <!-- Twitter card -->
+  <meta name="twitter:card"        content="summary">
+  <meta name="twitter:title"       content="Ditsö — Ropa para la Mujer Costarricense">
+  <meta name="twitter:description" content="Ropa fresca y cómoda para la mujer que es la semilla de todo. Marca costarricense con raíces Bribri.">
+  <meta name="twitter:image"       content="https://ditsoboutiquecr.com/assets/brand/logo.png">
+
+  <!-- Schema.org -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ClothingStore",
+    "name": "Ditsö",
+    "description": "Marca costarricense de ropa fresca y cómoda para la mujer.",
+    "url": "https://ditsoboutiquecr.com/",
+    "logo": "https://ditsoboutiquecr.com/assets/brand/logo.png",
+    "image": "https://ditsoboutiquecr.com/assets/brand/logo.png",
+    "telephone": "+50685978998",
+    "address": { "@type": "PostalAddress", "addressCountry": "CR" },
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+50685978998",
+      "contactType": "customer service",
+      "availableLanguage": "Spanish"
+    },
+    "sameAs": ["https://wa.me/50685978998"],
+    "priceRange": "₡₡"
+  }
+  </script>
 
   <!-- Fuentes Google -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,700;1,6..96,400&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload"
+        href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,700;1,6..96,400&family=Montserrat:wght@400;500;600;700&display=swap"
+        as="style">
+  <noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,700;1,6..96,400&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  </noscript>
 
   <!-- Estilos principales -->
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/styles.min.css">
+
+
+  <!-- ══════════════════════════════════════════════════════
+       FASE 1 — ocultar elementos de compra/carrito
+       Para activar Fase 2: eliminar este bloque.
+       ══════════════════════════════════════════════════════ -->
+  <style>
+    .cart-btn, .cart-badge { display: none !important; }
+    .product-card__actions { display: none !important; }
+    .oferta-card .btn-whatsapp { display: none !important; }
+    #cart-modal-overlay { display: none !important; }
+  </style>
 </head>
 
 <body>
@@ -85,7 +144,7 @@
           <li><a href="#inicio"    class="active">Inicio</a></li>
           <li><a href="#tienda">Tienda</a></li>
           <li><a href="#ofertas">Ofertas</a></li>
-          <li><a href="#guia-tallas">Guía de Tallas</a></li>
+          <li><a href="#tips">Tips de Ropa</a></li>
           <li><a href="#atencion">Atención al Cliente</a></li>
           <li><a href="#sobre-ditso">Sobre Ditsö</a></li>
         </ul>
@@ -169,7 +228,7 @@
       <li><a href="#inicio">Inicio</a></li>
       <li><a href="#tienda">Tienda</a></li>
       <li><a href="#ofertas">Ofertas</a></li>
-      <li><a href="#guia-tallas">Guía de Tallas</a></li>
+      <li><a href="#tips">Tips de Ropa</a></li>
       <li><a href="#atencion">Atención al Cliente</a></li>
       <li><a href="#sobre-ditso">Sobre Ditsö</a></li>
     </ul>
@@ -218,7 +277,7 @@
                 <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/>
                 <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12" stroke="currentColor" fill="none"/>
               </svg>
-              Ropa Orgánica · Costa Rica · Hecho con Amor
+              Ropa de Calidad · Costa Rica · Hecho con Amor
             </p>
 
             <h1 class="hero__title">
@@ -228,7 +287,7 @@
 
             <p class="hero__subtitle">
               <em>Ditsö</em> — que en lengua Bribri significa "Semilla" — nació para honrar
-              a la mujer costarricense. Ropa orgánica, fresca y cómoda, diseñada
+              a la mujer costarricense. Ropa fresca y cómoda, diseñada
               pensando en usted.
             </p>
 
@@ -269,7 +328,7 @@
             <div class="hero__badge">
               <span class="hero__badge-icon">🌱</span>
               <div class="hero__badge-text">
-                Telas Orgánicas<br>
+                Telas de Calidad<br>
                 <span style="font-weight:400; font-size:14px; color:#555;">100% naturales</span>
               </div>
             </div>
@@ -287,7 +346,7 @@
       <div class="container">
 
         <div class="tienda__header">
-          <h2 class="section-title">Nuestra Tienda</h2>
+          <h2 class="section-title reveal">Nuestra Tienda</h2>
           <p class="section-subtitle">
             Prendas diseñadas para la mujer que merece sentirse cómoda, elegante
             y orgullosa de sus raíces.
@@ -295,7 +354,7 @@
         </div>
 
         <!-- Filtros de categoría -->
-        <div class="category-filters" role="group" aria-label="Filtrar por categoría">
+        <div class="category-filters reveal reveal--d2" role="group" aria-label="Filtrar por categoría">
           <button class="filter-btn active" data-category="todas" aria-pressed="true">Todas</button>
           <button class="filter-btn" data-category="blusas"      aria-pressed="false">Blusas</button>
           <button class="filter-btn" data-category="vestidos"    aria-pressed="false">Vestidos</button>
@@ -320,7 +379,7 @@
       <div class="container">
 
         <div class="ofertas__header">
-          <h2 class="section-title" style="color: var(--color-cream);">Ofertas Especiales</h2>
+          <h2 class="section-title reveal" style="color: var(--color-cream);">Ofertas Especiales</h2>
           <p class="section-subtitle" style="color: rgba(255,255,204,0.8);">
             Prendas seleccionadas con descuentos exclusivos para usted.
             ¡No se las pierda!
@@ -337,107 +396,31 @@
 
 
     <!-- ══════════════════════════════════════
-         SECCIÓN 4 — GUÍA DE TALLAS
+         SECCIÓN 4 — GUÍA DE TALLAS (removida)
          ══════════════════════════════════════ -->
-    <section id="guia-tallas" class="guia-tallas" aria-label="Guía de tallas">
+
+
+    <!-- ══════════════════════════════════════
+         SECCIÓN 4.5 — TIPS DE ROPA
+         ══════════════════════════════════════ -->
+    <section id="tips" class="tips" aria-label="Tips de ropa">
       <div class="container">
-
-        <div class="guia-tallas__header">
-          <h2 class="section-title">Guía de Tallas</h2>
+        <div class="tips__header">
+          <h2 class="section-title reveal">Tips de Ropa</h2>
+          <p class="section-subtitle reveal reveal--d1">
+            Consejos prácticos para cuidar, lucir y aprovechar al máximo
+            cada prenda de su clóset.
+          </p>
         </div>
-
-        <p class="guia-tallas__intro">
-          Para encontrar su talla perfecta, mida su busto, cintura y cadera
-          con una cinta métrica. Si está entre dos tallas, le recomendamos
-          elegir la más grande para mayor comodidad.
-        </p>
-
-        <!-- Tabla de tallas — responsive con scroll horizontal en móvil -->
-        <div class="table-wrapper" role="region" aria-label="Tabla de equivalencia de tallas" tabindex="0">
-          <table class="size-table">
-            <thead>
-              <tr>
-                <th scope="col">Talla</th>
-                <th scope="col">Busto (cm)</th>
-                <th scope="col">Cintura (cm)</th>
-                <th scope="col">Cadera (cm)</th>
-                <th scope="col">Equivalencia Internacional</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>XS</td>
-                <td>80 – 84</td>
-                <td>60 – 64</td>
-                <td>86 – 90</td>
-                <td>XS / 32 / 4 US</td>
-              </tr>
-              <tr>
-                <td>S</td>
-                <td>84 – 88</td>
-                <td>64 – 68</td>
-                <td>90 – 94</td>
-                <td>S / 34 / 6 US</td>
-              </tr>
-              <tr>
-                <td>M</td>
-                <td>88 – 92</td>
-                <td>68 – 72</td>
-                <td>94 – 98</td>
-                <td>M / 36–38 / 8–10 US</td>
-              </tr>
-              <tr>
-                <td>L</td>
-                <td>92 – 98</td>
-                <td>72 – 78</td>
-                <td>98 – 104</td>
-                <td>L / 40–42 / 12–14 US</td>
-              </tr>
-              <tr>
-                <td>XL</td>
-                <td>98 – 105</td>
-                <td>78 – 85</td>
-                <td>104 – 112</td>
-                <td>XL / 44–46 / 16 US</td>
-              </tr>
-              <tr>
-                <td>2XL</td>
-                <td>105 – 114</td>
-                <td>85 – 94</td>
-                <td>112 – 120</td>
-                <td>2XL / 48–50 / 18–20 US</td>
-              </tr>
-              <tr>
-                <td>3XL</td>
-                <td>114 – 124</td>
-                <td>94 – 104</td>
-                <td>120 – 130</td>
-                <td>3XL / 52–54 / 22–24 US</td>
-              </tr>
-            </tbody>
-          </table>
+        <div class="category-filters reveal reveal--d2" role="group" aria-label="Filtrar tips por categoría">
+          <button class="tip-filter-btn active" data-tip-category="todas"      aria-pressed="true">Todas</button>
+          <button class="tip-filter-btn"        data-tip-category="blusas"     aria-pressed="false">Blusas</button>
+          <button class="tip-filter-btn"        data-tip-category="vestidos"   aria-pressed="false">Vestidos</button>
+          <button class="tip-filter-btn"        data-tip-category="pantalones" aria-pressed="false">Pantalones</button>
+          <button class="tip-filter-btn"        data-tip-category="accesorios" aria-pressed="false">Accesorios</button>
         </div>
-
-        <!-- Nota de WhatsApp -->
-        <div class="guia-tallas__note" role="note">
-          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
-          </svg>
-          <span>
-            <strong>¿Tiene dudas sobre su talla?</strong>
-            ¡Escríbanos por WhatsApp y con gusto le ayudamos a encontrar la talla perfecta! &nbsp;
-            <a
-              href="https://wa.me/50600000000"
-              data-whatsapp-link
-              data-whatsapp-msg="Hola Ditsö, tengo dudas sobre las tallas. ¿Me pueden ayudar?"
-              target="_blank"
-              rel="noopener noreferrer"
-              style="color: #1EAF55; font-weight: 700; text-decoration: underline;"
-            >Escribirnos ahora →</a>
-          </span>
-        </div>
-
-      </div><!-- /container -->
+        <div id="tips-grid" class="tips-grid" role="list" aria-label="Tips de Ditsö"></div>
+      </div>
     </section>
 
 
@@ -448,7 +431,7 @@
       <div class="container">
 
         <div class="text-center" style="margin-bottom: var(--space-lg);">
-          <h2 class="section-title">Atención al Cliente</h2>
+          <h2 class="section-title reveal">Atención al Cliente</h2>
           <p class="section-subtitle">
             Estamos aquí para servirle. Puede contactarnos por WhatsApp,
             correo electrónico, o consultar nuestras preguntas frecuentes.
@@ -458,7 +441,7 @@
         <div class="atencion__inner">
 
           <!-- Tarjeta de contacto -->
-          <div class="atencion__contact">
+          <div class="atencion__contact reveal reveal--d1">
             <div class="atencion__contact-card">
               <h3 class="atencion__contact-title">Contáctenos</h3>
 
@@ -654,7 +637,7 @@
         <div class="sobre-ditso__inner">
 
           <!-- Imagen -->
-          <div class="sobre-ditso__image-col">
+          <div class="sobre-ditso__image-col reveal">
             <div class="sobre-ditso__image-frame" aria-hidden="true">
               <!-- REEMPLAZAR con imagen real -->
               <div class="img-placeholder">
@@ -668,7 +651,7 @@
           </div>
 
           <!-- Contenido -->
-          <div class="sobre-ditso__content">
+          <div class="sobre-ditso__content reveal reveal--d2">
             <span class="sobre-ditso__tag">Nuestra Historia</span>
 
             <h2 class="sobre-ditso__title">
@@ -687,7 +670,7 @@
             <p class="sobre-ditso__body">
               Creamos esta marca para honrar a la mujer costarricense de 60 años
               y más: la mujer que ha sembrado familia, comunidad e historia.
-              Ropa orgánica, fresca y cómoda — porque usted merece sentirse bien,
+              Ropa fresca y cómoda — porque usted merece sentirse bien,
               verse hermosa, y llevar su identidad con orgullo.
             </p>
 
@@ -695,8 +678,8 @@
               <div class="sobre-ditso__value-item">
                 <span class="sobre-ditso__value-icon">🌿</span>
                 <div class="sobre-ditso__value-text">
-                  <strong>Materiales Orgánicos</strong>
-                  <span>Lino natural, algodón orgánico y muselina suave. Sin químicos dañinos.</span>
+                  <strong>Materiales de Calidad</strong>
+                  <span>Lino natural, algodón y muselina suave. Materiales de calidad.</span>
                 </div>
               </div>
               <div class="sobre-ditso__value-item">
@@ -743,7 +726,7 @@
             <span class="logo__wordmark">Ditsö</span>
           </a>
           <p class="footer__tagline">
-            Ropa orgánica, fresca y cómoda para la mujer que es la semilla de todo.
+            Ropa fresca y cómoda para la mujer que es la semilla de todo.
             Con raíces en la cultura Bribri de Costa Rica.
           </p>
         </div>
@@ -756,7 +739,7 @@
               <li><a href="#inicio">Inicio</a></li>
               <li><a href="#tienda">Tienda</a></li>
               <li><a href="#ofertas">Ofertas</a></li>
-              <li><a href="#guia-tallas">Guía de Tallas</a></li>
+              <li><a href="#tips">Tips de Ropa</a></li>
               <li><a href="#atencion">Atención al Cliente</a></li>
               <li><a href="#sobre-ditso">Sobre Ditsö</a></li>
             </ul>
@@ -903,7 +886,7 @@
   </a>
 
   <!-- Script principal -->
-  <script src="js/main.js"></script>
+  <script src="js/main.min.js"></script>
 
 </body>
 </html>
