@@ -1115,15 +1115,19 @@ p {
 }
 
 /* Contenido de tarjeta */
-/* ── Galería: tira de miniaturas bajo la foto principal ── */
-.product-card__thumbs {
+/* ── Galería: tira de miniaturas bajo la foto principal ──
+   Compartida entre las tarjetas de la tienda (.product-card)
+   y las de ofertas (.oferta-card). */
+.product-card__thumbs,
+.oferta-card__thumbs {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-xs);
   padding: var(--space-xs) var(--space-md) 0;
 }
 
-.product-card__thumb {
+.product-card__thumb,
+.oferta-card__thumb {
   width: 52px;
   height: 52px;
   padding: 0;
@@ -1135,22 +1139,26 @@ p {
   transition: border-color 0.2s ease, transform 0.2s ease;
 }
 
-.product-card__thumb img {
+.product-card__thumb img,
+.oferta-card__thumb img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
 }
 
-.product-card__thumb:hover {
+.product-card__thumb:hover,
+.oferta-card__thumb:hover {
   transform: translateY(-2px);
 }
 
-.product-card__thumb.active {
+.product-card__thumb.active,
+.oferta-card__thumb.active {
   border-color: var(--color-gold);
 }
 
-.product-card__thumb:focus-visible {
+.product-card__thumb:focus-visible,
+.oferta-card__thumb:focus-visible {
   outline: 2px solid var(--color-gold);
   outline-offset: 2px;
 }

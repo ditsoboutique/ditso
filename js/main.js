@@ -411,12 +411,28 @@ function buildOfferCard(product) {
   const safeDesc = sanitize(product.description);
   const nameEsc  = product.name.replace(/'/g, "\\'");
 
-  const imagePart = product.image
-    ? `<img src="${sanitize(resolveAssetUrl(product.image))}" alt="Fotografía de ${safeName}" loading="lazy" decoding="async">`
+  const gallery = collectProductImages(product);
+  const mainSrc = gallery[0] || '';
+
+  const imagePart = mainSrc
+    ? `<img src="${sanitize(resolveAssetUrl(mainSrc))}" alt="Fotografía de ${safeName}" loading="lazy" decoding="async">`
     : `<div class="img-placeholder" aria-hidden="true">
          ${getLeafSVG(48)}
          <span>Foto próximamente</span>
        </div>`;
+
+  const thumbsPart = gallery.length > 1
+    ? `<div class="oferta-card__thumbs" role="group" aria-label="Fotos de ${safeName}">
+         ${gallery.map((src, i) => {
+           const safeSrc = sanitize(resolveAssetUrl(src));
+           return `<button type="button" class="oferta-card__thumb${i === 0 ? ' active' : ''}"
+             data-action="thumb" data-src="${safeSrc}"
+             aria-label="Ver foto ${i + 1} de ${safeName}">
+             <img src="${safeSrc}" alt="" loading="lazy" decoding="async">
+           </button>`;
+         }).join('')}
+       </div>`
+    : '';
 
   const pricePart = hasDiscount
     ? `<span class="oferta-card__price">${formatPrice(product.price)}</span>
@@ -430,6 +446,7 @@ function buildOfferCard(product) {
         ${imagePart}
         <span class="oferta-badge">⭐ Oferta Especial</span>
       </div>
+      ${thumbsPart}
       <div class="oferta-card__body">
         <h3 class="oferta-card__name">${safeName}</h3>
         <p class="oferta-card__desc">${safeDesc}</p>
@@ -489,11 +506,14 @@ function initProductButtons() {
     const id     = btn.dataset.productId;
 
     if (action === 'thumb') {
-      /* Intercambiar la foto principal por la miniatura elegida */
-      const card    = btn.closest('.product-card');
-      const mainImg = card && card.querySelector('.product-card__image img');
-      if (mainImg) mainImg.src = btn.dataset.src;
-      if (card) card.querySelectorAll('.product-card__thumb').forEach(t => t.classList.remove('active'));
+      /* Intercambiar la foto principal por la miniatura elegida
+         (funciona tanto para .product-card como para .oferta-card) */
+      const card = btn.closest('.product-card, .oferta-card');
+      if (card) {
+        const mainImg = card.querySelector('.product-card__image img, .oferta-card__image img');
+        if (mainImg) mainImg.src = btn.dataset.src;
+        card.querySelectorAll('[data-action="thumb"]').forEach(t => t.classList.remove('active'));
+      }
       btn.classList.add('active');
       return;
     }
