@@ -1,1 +1,25 @@
-[]
+[
+  {
+    "id": "1",
+    "name": "vestido-test",
+    "category": "vestidos",
+    "categoryLabel": "Vestidos",
+    "description": "vestido colo azul",
+    "price": 20994,
+    "priceOriginal": 24000,
+    "image": "/assets/productos/vestido-test.avif",
+    "inOffer": false,
+    "active": true
+  },
+  {
+    "id": "2",
+    "name": "Blusa azul de botones",
+    "category": "blusas",
+    "categoryLabel": "Blusas",
+    "description": "Blusa azul",
+    "price": 15000,
+    "image": "/assets/productos/blusa_azul.jpg",
+    "inOffer": false,
+    "active": true
+  }
+]

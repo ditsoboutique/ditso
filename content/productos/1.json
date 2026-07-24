@@ -1,0 +1,12 @@
+{
+  "id": "1",
+  "name": "vestido-test",
+  "category": "vestidos",
+  "categoryLabel": "Vestidos",
+  "description": "vestido colo azul",
+  "price": 20994,
+  "priceOriginal": 24000,
+  "image": "/assets/productos/vestido-test.avif",
+  "inOffer": false,
+  "active": true
+}

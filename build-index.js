@@ -18,6 +18,13 @@
 const fs   = require('fs');
 const path = require('path');
 
+/* Solo archivos de contenido: ignora índices/bundles que puedan
+   haber quedado por error dentro de una carpeta de contenido
+   (ej. un content/tips/tips-index.json extraviado). */
+function isContentJson(f) {
+  return f.endsWith('.json') && !/-index\.json$|-bundle\.json$/.test(f);
+}
+
 function buildIndex(folderName, indexFileName) {
   const dir       = path.join(__dirname, 'content', folderName);
   const indexPath = path.join(__dirname, 'content', indexFileName);
@@ -29,7 +36,7 @@ function buildIndex(folderName, indexFileName) {
 
   try {
     const files = fs.readdirSync(dir)
-      .filter(f => f.endsWith('.json'))
+      .filter(isContentJson)
       .map(f => f.replace('.json', ''))
       .sort();
 
@@ -57,7 +64,7 @@ function buildBundle(folderName, bundleFileName) {
 
   try {
     const items = fs.readdirSync(dir)
-      .filter(f => f.endsWith('.json'))
+      .filter(isContentJson)
       .sort()
       .map(f => {
         try {
