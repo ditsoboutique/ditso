@@ -311,6 +311,20 @@ function getLeafSVG(size = 56) {
   </svg>`;
 }
 
+/* Reúne todas las fotos de un producto: la principal (image) más las
+   adicionales (images, del widget de lista del CMS). Acepta strings o
+   {image:...} y elimina duplicados. Devuelve un array de rutas. */
+function collectProductImages(product) {
+  const gallery = [];
+  const push = (val) => {
+    const src = typeof val === 'string' ? val : (val && val.image);
+    if (src && !gallery.includes(src)) gallery.push(src);
+  };
+  if (product.image) push(product.image);
+  if (Array.isArray(product.images)) product.images.forEach(push);
+  return gallery;
+}
+
 function buildProductCard(product, cardIndex = 0) {
   const hasDiscount = product.priceOriginal && product.priceOriginal > product.price;
   const discountPct = hasDiscount ? Math.round((1 - product.price / product.priceOriginal) * 100) : 0;
@@ -321,12 +335,30 @@ function buildProductCard(product, cardIndex = 0) {
   const safeLabel = sanitize(product.categoryLabel);
   const safeCat   = sanitize(product.category);
 
-  const imagePart = product.image
-    ? `<img src="${sanitize(resolveAssetUrl(product.image))}" alt="Fotografía de ${safeName}" loading="lazy" decoding="async">`
+  const gallery = collectProductImages(product);
+  const mainSrc = gallery[0] || '';
+
+  const imagePart = mainSrc
+    ? `<img src="${sanitize(resolveAssetUrl(mainSrc))}" alt="Fotografía de ${safeName}" loading="lazy" decoding="async">`
     : `<div class="product-card__image-placeholder" aria-hidden="true">
          ${getLeafSVG(48)}
          <span>Foto próximamente</span>
        </div>`;
+
+  /* Tira de miniaturas — solo si hay más de una foto. Al hacer clic,
+     el delegador (handleBtn) intercambia la imagen principal. */
+  const thumbsPart = gallery.length > 1
+    ? `<div class="product-card__thumbs" role="group" aria-label="Fotos de ${safeName}">
+         ${gallery.map((src, i) => {
+           const safeSrc = sanitize(resolveAssetUrl(src));
+           return `<button type="button" class="product-card__thumb${i === 0 ? ' active' : ''}"
+             data-action="thumb" data-src="${safeSrc}"
+             aria-label="Ver foto ${i + 1} de ${safeName}">
+             <img src="${safeSrc}" alt="" loading="lazy" decoding="async">
+           </button>`;
+         }).join('')}
+       </div>`
+    : '';
 
   const pricePart = hasDiscount
     ? `<span class="product-card__price">${formatPrice(product.price)}</span>
@@ -346,6 +378,7 @@ function buildProductCard(product, cardIndex = 0) {
         <span class="product-card__category-badge">${safeLabel}</span>
         ${offerBadge}
       </div>
+      ${thumbsPart}
       <div class="product-card__body">
         <h3 class="product-card__name">${safeName}</h3>
         <p class="product-card__description">${safeDesc}</p>
@@ -454,6 +487,16 @@ function initProductButtons() {
     const action = btn.dataset.action;
     const name   = btn.dataset.productName;
     const id     = btn.dataset.productId;
+
+    if (action === 'thumb') {
+      /* Intercambiar la foto principal por la miniatura elegida */
+      const card    = btn.closest('.product-card');
+      const mainImg = card && card.querySelector('.product-card__image img');
+      if (mainImg) mainImg.src = btn.dataset.src;
+      if (card) card.querySelectorAll('.product-card__thumb').forEach(t => t.classList.remove('active'));
+      btn.classList.add('active');
+      return;
+    }
 
     if (action === 'agregar-carrito') openCartModal(id, name);
     if (action === 'ver-detalles')    openProductModal(id, name);
