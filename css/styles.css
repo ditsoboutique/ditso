@@ -49,7 +49,7 @@
 
   /* Fondos de sección */
   --bg-main:        #FFFFFF;
-  --bg-section-alt: #F5F5F5;
+  --bg-section-alt: #F2EEE4;   /* Marfil cálido — alterna con secciones blancas */
   --bg-olive:       #3D4A1A;
   --bg-terracotta:  #6B3318;
 
@@ -1174,7 +1174,7 @@ p {
    9. OFERTAS / NOVEDADES
    ───────────────────────────────────────────── */
 .ofertas {
-  background: var(--bg-section-alt);
+  background: var(--bg-olive);   /* Banda oscura — resalta el texto crema y separa secciones */
   padding: var(--space-xl) 0;
   position: relative;
   overflow: hidden;
@@ -2302,4 +2302,21 @@ img.logo__isotipo {
   .reveal--d3 { transition-delay: 0.24s; }
   .reveal--d4 { transition-delay: 0.32s; }
   .reveal--d5 { transition-delay: 0.40s; }
+}
+
+/* ================================================================
+   DIVISOR DE SECCIONES — hilo dorado con desvanecido
+   Se coloca como <hr class="section-divider"> entre secciones
+   claras para separarlas con un acento sutil de marca.
+   El !important en background-image vence al reset global
+   (* { background-image: none }) más arriba en el archivo.
+   ================================================================ */
+.section-divider {
+  border: 0;
+  height: 2px;
+  width: 100%;
+  max-width: 960px;
+  margin: var(--space-lg) auto;
+  background-image: linear-gradient(to right, transparent, var(--color-gold), transparent) !important;
+  opacity: 0.55;
 }
