@@ -884,6 +884,14 @@ p {
   object-fit: cover;
 }
 
+/* Logo de marca centrado dentro del marco (no recortado) */
+.sobre-ditso__image-frame .sobre-ditso__brand-img {
+  object-fit: contain;
+  padding: 16%;
+  box-sizing: border-box;
+  background-color: var(--bg-section-alt);
+}
+
 .sobre-ditso__deco-border {
   position: absolute;
   top: -12px;
