@@ -112,3 +112,31 @@ collections:
       - { label: "Texto del tip", name: "text", widget: "text" }
       - { label: "Foto (opcional)", name: "image", widget: "image", required: false }
       - { label: "Visible", name: "active", widget: "boolean", default: true }
+
+  - name: "noticias"
+    label: "Últimas Noticias"
+    label_singular: "Noticia"
+    folder: "content/noticias"
+    format: json
+    extension: json
+    create: true
+    delete: true
+    slug: "{{slug}}"
+    identifier_field: title
+    summary: "{{title}} — {{eventDate}}"
+    sortable_fields: ['eventDate', 'title']
+    media_folder: "assets/noticias"
+    public_folder: "assets/noticias"
+    fields:
+      - { label: "Título", name: "title", widget: "string" }
+      - label: "Fecha del evento"
+        name: "eventDate"
+        widget: "datetime"
+        date_format: "DD/MM/YYYY"
+        time_format: false
+        format: "YYYY-MM-DD"
+        required: false
+      - { label: "Lugar / Ubicación", name: "location", widget: "string", required: false }
+      - { label: "Descripción", name: "description", widget: "text" }
+      - { label: "Foto (opcional)", name: "image", widget: "image", required: false }
+      - { label: "Visible", name: "active", widget: "boolean", default: true }

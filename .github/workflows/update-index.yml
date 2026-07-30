@@ -12,6 +12,7 @@ on:
     paths:
       - 'content/productos/**'
       - 'content/tips/**'
+      - 'content/noticias/**'
   workflow_dispatch:
 
 permissions:
@@ -37,8 +38,8 @@ jobs:
         run: |
           git config user.name "Ditsö Bot"
           git config user.email "bot@ditso.cr"
-          git add content/productos-index.json content/tips-index.json \
-                  content/productos-bundle.json content/tips-bundle.json
+          git add content/productos-index.json content/tips-index.json content/noticias-index.json \
+                  content/productos-bundle.json content/tips-bundle.json content/noticias-bundle.json
           if git diff --staged --quiet; then
             echo "Indexes and bundles already up to date."
           else

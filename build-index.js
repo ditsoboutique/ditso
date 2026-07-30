@@ -52,6 +52,7 @@ function buildIndex(folderName, indexFileName) {
 
 buildIndex('productos', 'productos-index.json');
 buildIndex('tips',      'tips-index.json');
+buildIndex('noticias',  'noticias-index.json');
 
 /* ── BUNDLE: genera un único JSON con todos los productos y tips
    Esto permite al sitio hacer 1 sola request en lugar de N+1
@@ -86,3 +87,4 @@ function buildBundle(folderName, bundleFileName) {
 
 buildBundle('productos', 'productos-bundle.json');
 buildBundle('tips',      'tips-bundle.json');
+buildBundle('noticias',  'noticias-bundle.json');

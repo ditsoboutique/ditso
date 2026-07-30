@@ -189,6 +189,48 @@ async function loadTips() {
   }
 }
 
+/* Carga las noticias/eventos — bundle primero, fallback individual.
+   Ordena de más reciente a más antiguo por eventDate (ISO YYYY-MM-DD,
+   que se ordena cronológicamente como texto). Las que no tienen fecha
+   van al final. */
+function sortNoticias(list) {
+  return list.sort((a, b) => {
+    const da = a.eventDate || '';
+    const db = b.eventDate || '';
+    if (da && db) return db.localeCompare(da);   /* descendente */
+    if (da) return -1;
+    if (db) return 1;
+    return 0;
+  });
+}
+
+async function loadNoticias() {
+  /* Intentar bundle primero */
+  try {
+    const res = await fetch(contentUrl('content/noticias-bundle.json'));
+    if (res.ok) {
+      const noticias = await res.json();
+      return sortNoticias(noticias.filter(n => n && n.active !== false));
+    }
+  } catch { /* bundle no disponible aún */ }
+
+  /* Fallback: índice + fetches individuales */
+  try {
+    const indexRes = await fetch(contentUrl('content/noticias-index.json'));
+    if (!indexRes.ok) throw new Error('Noticias index not found');
+    const index = await indexRes.json();
+    const results = await Promise.all(
+      index.map(id => fetch(contentUrl(`content/noticias/${id}.json`))
+        .then(r => r.ok ? r.json() : null)
+        .catch(() => null))
+    );
+    return sortNoticias(results.filter(n => n !== null && n.active !== false));
+  } catch {
+    console.warn('Ditsö: noticias-index.json no encontrado. Sección Noticias vacía.');
+    return [];
+  }
+}
+
 
 /* ═══════════════════════════════════════════════
    3. MÓDULO: NAVEGACIÓN
@@ -619,6 +661,88 @@ function showTipsLoadingState() {
   }
 }
 
+
+/* ═══════════════════════════════════════════════
+   5.6 MÓDULO: ÚLTIMAS NOTICIAS / EVENTOS
+   Posts con foto, fecha de evento, lugar y descripción.
+   Mismo patrón que tips, con una insignia de fecha.
+   ═══════════════════════════════════════════════ */
+const MESES_ABBR = ['ENE','FEB','MAR','ABR','MAY','JUN','JUL','AGO','SEP','OCT','NOV','DIC'];
+
+/* Convierte "YYYY-MM-DD" en {day, month} para la insignia de fecha.
+   Se parsea manualmente para evitar corrimientos por zona horaria. */
+function parseEventDate(iso) {
+  if (!iso || typeof iso !== 'string') return null;
+  const m = iso.match(/^(\d{4})-(\d{2})-(\d{2})/);
+  if (!m) return null;
+  const monthIdx = parseInt(m[2], 10) - 1;
+  if (monthIdx < 0 || monthIdx > 11) return null;
+  return { day: String(parseInt(m[3], 10)), month: MESES_ABBR[monthIdx], year: m[1] };
+}
+
+function buildNoticiaCard(noticia, cardIndex = 0) {
+  const safeTitle = sanitize(noticia.title);
+  const safeText  = sanitize(noticia.description);
+  const safeLoc   = sanitize(noticia.location || '');
+  const d = parseEventDate(noticia.eventDate);
+
+  const imagePart = noticia.image
+    ? `<img src="${sanitize(resolveAssetUrl(noticia.image))}" alt="${safeTitle}" loading="lazy" decoding="async">`
+    : `<div class="noticia-card__image-placeholder" aria-hidden="true">
+         ${getLeafSVG(48)}
+         <span>Foto próximamente</span>
+       </div>`;
+
+  const badgePart = d
+    ? `<span class="noticia-card__date-badge" aria-hidden="true">
+         <strong>${d.day}</strong><span>${d.month}</span>
+       </span>` : '';
+
+  const locPart = safeLoc
+    ? `<p class="noticia-card__location">📍 ${safeLoc}</p>` : '';
+
+  return `
+    <article class="noticia-card reveal" role="listitem" style="transition-delay:${Math.min(cardIndex*80,320)}ms">
+      <div class="noticia-card__image">
+        ${imagePart}
+        ${badgePart}
+      </div>
+      <div class="noticia-card__body">
+        <h3 class="noticia-card__title">${safeTitle}</h3>
+        ${locPart}
+        <p class="noticia-card__text">${safeText}</p>
+      </div>
+    </article>`;
+}
+
+/* Renderiza las noticias en el grid. Acepta el array ya cargado. */
+function renderNoticias(noticias) {
+  const grid = document.getElementById('noticias-grid');
+  if (!grid) return;
+
+  if (noticias.length === 0) {
+    grid.innerHTML = `<p style="text-align:center; color: var(--color-text-secondary); padding: var(--space-xl) 0; grid-column: 1/-1;">
+      Aún no hay noticias publicadas. ¡Vuelva pronto!
+    </p>`;
+  } else {
+    grid.innerHTML = noticias.map((n, i) => buildNoticiaCard(n, i)).join('');
+  }
+
+  observeRevealElements();
+}
+
+/* Muestra un mensaje mientras cargan las noticias */
+function showNoticiasLoadingState() {
+  const grid = document.getElementById('noticias-grid');
+  if (grid) {
+    grid.innerHTML = `
+      <div style="grid-column: 1/-1; text-align: center; padding: var(--space-xl) 0; color: var(--color-text-secondary);">
+        <div style="font-size: 48px; margin-bottom: var(--space-sm);">🗓️</div>
+        <p style="font-size: var(--text-md);">Cargando noticias...</p>
+      </div>`;
+  }
+}
+
 /* Muestra un spinner mientras cargan los productos */
 function showLoadingState() {
   const grid = document.getElementById('products-grid');
@@ -751,13 +875,15 @@ document.addEventListener('DOMContentLoaded', async () => {
   initScrollActiveNav();
   showLoadingState();
   showTipsLoadingState();
+  showNoticiasLoadingState();
   observeRevealElements();   /* static HTML reveals */
 
-  /* Cargar config, productos y tips en paralelo */
-  const [, products, tips] = await Promise.all([
+  /* Cargar config, productos, tips y noticias en paralelo */
+  const [, products, tips, noticias] = await Promise.all([
     loadConfig(),
     loadProducts(),
     loadTips(),
+    loadNoticias(),
   ]);
 
   /* Actualizar todos los enlaces de WhatsApp con el número real del CMS */
@@ -775,6 +901,9 @@ document.addEventListener('DOMContentLoaded', async () => {
   /* Renderizar tips de ropa con el contenido del CMS */
   renderTips(tips);
 
+  /* Renderizar últimas noticias / eventos del CMS */
+  renderNoticias(noticias);
+
   /* Inicializar modal después de que el DOM está listo */
   modalOverlay.init();
 
@@ -784,6 +913,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   );
   console.info(`  Productos cargados: ${products.length}`);
   console.info(`  Tips cargados: ${tips.length}`);
+  console.info(`  Noticias cargadas: ${noticias.length}`);
   console.info(`  WhatsApp: ${CONFIG.whatsappNumber}`);
   console.info(`  Panel admin: ${contentUrl('admin/')}`);
 });
