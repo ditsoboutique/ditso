@@ -817,20 +817,25 @@ p {
   opacity: 0.3;
 }
 
-/* Sello decorativo sobre la imagen */
+/* Sellos de confianza flotantes sobre la imagen (4 esquinas) */
 .hero__badge {
   position: absolute;
-  bottom: var(--space-md);
-  left: -var(--space-sm);
+  z-index: 2;
+  max-width: 48%;
   background: var(--color-cream);
   border: 2px solid var(--color-gold);
   border-radius: var(--radius-md);
-  padding: var(--space-sm) var(--space-md);
+  padding: var(--space-xs) var(--space-sm);
   box-shadow: var(--shadow-md);
   display: flex;
   align-items: center;
   gap: var(--space-xs);
 }
+
+.hero__badge--bl { bottom: var(--space-sm); left: var(--space-sm); }
+.hero__badge--tr { top: var(--space-sm); right: var(--space-sm); }
+.hero__badge--tl { top: var(--space-sm); left: var(--space-sm); }
+.hero__badge--br { bottom: var(--space-sm); right: var(--space-sm); }
 
 .hero__badge-text {
   font-size: var(--text-xs);
@@ -839,8 +844,23 @@ p {
   line-height: 1.3;
 }
 
+.hero__badge-sub {
+  font-weight: 400;
+  font-size: 14px;
+  color: var(--color-text-secondary);
+}
+
 .hero__badge-icon {
   font-size: 28px;
+}
+
+/* En pantallas pequeñas dejar solo un sello para no recargar */
+@media (max-width: 768px) {
+  .hero__badge--tr,
+  .hero__badge--tl,
+  .hero__badge--br {
+    display: none;
+  }
 }
 
 
