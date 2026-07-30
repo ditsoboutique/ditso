@@ -31,9 +31,11 @@
     font-src 'self' https://fonts.gstatic.com;
     img-src 'self' data: https://via.placeholder.com https://placehold.co;
     connect-src 'self';
+    object-src 'none';
     frame-ancestors 'none';
     base-uri 'self';
-    form-action 'self'
+    form-action 'self';
+    upgrade-insecure-requests
   ">
 
   <!-- No enviar Referer al navegar a sitios externos (privacidad) -->
@@ -670,7 +672,7 @@
           <!-- Imagen -->
           <div class="sobre-ditso__image-col reveal">
             <div class="sobre-ditso__image-frame">
-              <img src="assets/brand/logo.png" alt="Logo de Ditsö" class="sobre-ditso__brand-img" loading="lazy" decoding="async">
+              <img src="assets/brand/logo.png" alt="Logo de Ditsö" class="sobre-ditso__brand-img" width="200" height="457" loading="lazy" decoding="async">
             </div>
             <div class="sobre-ditso__deco-border" aria-hidden="true"></div>
           </div>
