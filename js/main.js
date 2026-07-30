@@ -42,7 +42,7 @@
 let CONFIG = {
   whatsappNumber:  '50685978998',
   whatsappMessage: '¡Hola Ditsö! Me gustaría obtener más información sobre sus productos.',
-  storeEmail:      'hola@ditso.cr',
+  storeEmail:      'contacto@ditsoboutiquecr.com',
 };
 
 function getWhatsAppURL(message) {

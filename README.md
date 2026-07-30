@@ -132,6 +132,33 @@ Cuando esté lista la tienda transaccional:
 
 ---
 
+## Correo electrónico (contacto@ditsoboutiquecr.com)
+
+La dirección **contacto@ditsoboutiquecr.com** reenvía automáticamente a la
+cuenta de Gmail **ditsoboutique@gmail.com** usando **ImprovMX** (gratis,
+solo recepción). Hay además un *catch-all* (`*`), así que cualquier
+dirección @ditsoboutiquecr.com llega al mismo Gmail.
+
+**Cómo funciona**
+- Los correos entrantes los enruta ImprovMX según los registros DNS del dominio.
+- El panel para cambiar el destino o agregar alias está en https://improvmx.com
+  (dominio: `ditsoboutiquecr.com`).
+
+**Registros DNS (en GoDaddy — NO borrar los `A`/`CNAME` del sitio):**
+
+| Tipo | Nombre | Valor | Prioridad |
+|---|---|---|---|
+| MX | `@` | `mx1.improvmx.com` | 10 |
+| MX | `@` | `mx2.improvmx.com` | 20 |
+| TXT | `@` | `v=spf1 include:spf.improvmx.com ~all` | — |
+
+> **Nota:** es *solo recepción*. Al responder desde Gmail, el correo sale
+> desde la dirección personal de Gmail, no desde `contacto@…`. Para
+> **responder como** `contacto@ditsoboutiquecr.com` se necesita un paso de
+> envío (SMTP de pago de ImprovMX, o una casilla gratuita en Zoho Mail).
+
+---
+
 ## Costos
 
 | Servicio | Costo |
@@ -139,8 +166,9 @@ Cuando esté lista la tienda transaccional:
 | GitHub + Pages | Gratis |
 | Decap CMS | Gratis |
 | Cloudflare Worker (OAuth) | Gratis |
-| Dominio .cr (opcional) | ~$20/año |
+| ImprovMX (reenvío de correo) | Gratis |
+| Dominio | ~$20/año |
 
 ---
 
-© 2025 Ditsö. Costa Rica.
+© 2026 Ditsö. Costa Rica.
