@@ -817,25 +817,25 @@ p {
   opacity: 0.3;
 }
 
-/* Sellos de confianza flotantes sobre la imagen (4 esquinas) */
+/* Panel de sellos de confianza — cuadrícula 2×2 (sin depender de una foto) */
+.hero__image-frame { display: none; }   /* sin foto por ahora: el lado derecho es el panel de sellos */
+
+.hero__badges {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-sm);
+}
+
 .hero__badge {
-  position: absolute;
-  z-index: 2;
-  max-width: 48%;
   background: var(--color-cream);
   border: 2px solid var(--color-gold);
   border-radius: var(--radius-md);
-  padding: var(--space-xs) var(--space-sm);
+  padding: var(--space-sm);
   box-shadow: var(--shadow-md);
   display: flex;
   align-items: center;
   gap: var(--space-xs);
 }
-
-.hero__badge--bl { bottom: var(--space-sm); left: var(--space-sm); }
-.hero__badge--tr { top: var(--space-sm); right: var(--space-sm); }
-.hero__badge--tl { top: var(--space-sm); left: var(--space-sm); }
-.hero__badge--br { bottom: var(--space-sm); right: var(--space-sm); }
 
 .hero__badge-text {
   font-size: var(--text-xs);
@@ -854,11 +854,9 @@ p {
   font-size: 28px;
 }
 
-/* En pantallas pequeñas dejar solo un sello para no recargar */
+/* En móvil el héroe se enfoca en el titular + CTAs; el panel de sellos se oculta */
 @media (max-width: 768px) {
-  .hero__badge--tr,
-  .hero__badge--tl,
-  .hero__badge--br {
+  .hero__badges {
     display: none;
   }
 }
