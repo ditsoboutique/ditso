@@ -187,6 +187,17 @@
   },
   {
     "active": true,
+    "price": 27000,
+    "name": "Set blanco",
+    "categoryLabel": "Ropa Cómoda",
+    "inOffer": false,
+    "id": "cj002",
+    "image": "assets/productos/gemini_generated_image_zg9p25zg9p25zg9p.jpg",
+    "description": "Blusa camisera lisa y Pantalón liso- Color Blanco - Material 100% rayón ",
+    "category": "ropa-comoda"
+  },
+  {
+    "active": true,
     "price": 15000,
     "name": "Enagua de cuerina de paletones",
     "categoryLabel": "Vestidos",
