@@ -1,0 +1,11 @@
+{
+  "active": true,
+  "price": 17000,
+  "name": "Set gris",
+  "categoryLabel": "Ropa Cómoda",
+  "inOffer": false,
+  "id": "cj003",
+  "image": "assets/productos/cj003.jpg",
+  "description": "Blusa lisa sin manga y Pantalón liso - Color Gris",
+  "category": "ropa-comoda"
+}
