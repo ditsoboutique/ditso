@@ -1,0 +1,11 @@
+{
+  "active": true,
+  "price": 13000,
+  "name": "Vestido rojo",
+  "categoryLabel": "Vestidos",
+  "inOffer": false,
+  "id": "203",
+  "image": "assets/productos/colección-olivo-vestido-rojo.png",
+  "description": "Vestido rojo. Marca H&M",
+  "category": "vestidos"
+}
