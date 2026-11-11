@@ -1,0 +1,14 @@
+{
+  "active": true,
+  "price": 14900,
+  "name": "Blazer azul",
+  "categoryLabel": "Blusas",
+  "inOffer": false,
+  "images": [
+    "assets/productos/a14-1.png"
+  ],
+  "id": "bz002",
+  "image": "assets/productos/a14-2.png",
+  "description": "Blazer azul",
+  "category": "blusas"
+}
