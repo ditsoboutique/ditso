@@ -85,5 +85,16 @@
     "image": "assets/productos/b12-1.png",
     "description": "Blusa azul manga campana",
     "category": "blusas"
+  },
+  {
+    "active": true,
+    "price": 12000,
+    "name": "Short de cuerina",
+    "categoryLabel": "Pantalones",
+    "inOffer": false,
+    "id": "sh007",
+    "image": "assets/productos/gemini_generated_image_kw6vzpkw6vzpkw6v.jpg",
+    "description": "Short corto color negro con elástico en cintura, material tipo cuerina.",
+    "category": "pantalones"
   }
 ]
