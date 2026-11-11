@@ -27,5 +27,16 @@
     "image": "assets/productos/a7-1.png",
     "description": "Abrigo negro con variedad de bolsillos, ideal para viajar",
     "category": "ropa-comoda"
+  },
+  {
+    "active": true,
+    "price": 6250,
+    "name": "Blusa de tirantes color mostaza y blanco",
+    "categoryLabel": "Blusas",
+    "inOffer": false,
+    "id": "b009",
+    "image": "assets/productos/b009-2.png",
+    "description": "Blusa de tirantes color mostaza y blanco",
+    "category": "blusas"
   }
 ]
