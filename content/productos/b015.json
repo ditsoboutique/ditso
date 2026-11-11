@@ -1,0 +1,11 @@
+{
+  "active": true,
+  "price": 12500,
+  "name": "Blusa con estampado floral",
+  "categoryLabel": "Blusas",
+  "inOffer": false,
+  "id": "b015",
+  "image": "assets/productos/b015.jpg",
+  "description": "Blusa manga larga - Color beige con estampado floral en la parte superior",
+  "category": "blusas"
+}
