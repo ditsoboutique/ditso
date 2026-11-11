@@ -15,6 +15,31 @@
   },
   {
     "active": true,
+    "price": 9000,
+    "name": "Vestido maxi gris",
+    "categoryLabel": "Vestidos",
+    "inOffer": false,
+    "id": "211",
+    "image": "assets/productos/colección-olivo-vestido-a-sin-logo.png",
+    "description": "Vestido maxi gris liso",
+    "category": "vestidos"
+  },
+  {
+    "active": true,
+    "price": 16250,
+    "name": "Pantalón gris",
+    "categoryLabel": "Pantalones",
+    "inOffer": false,
+    "images": [
+      "assets/productos/elena-pantalon-v2.png"
+    ],
+    "id": "504",
+    "image": "assets/productos/elena-pantalon-v3.png",
+    "description": "Pantalón gris con cordón vino",
+    "category": "pantalones"
+  },
+  {
+    "active": true,
     "price": 9600,
     "name": "Abrigo negro para viaje",
     "categoryLabel": "Ropa Cómoda",
@@ -37,6 +62,17 @@
     "id": "b009",
     "image": "assets/productos/b009-2.png",
     "description": "Blusa de tirantes color mostaza y blanco",
+    "category": "blusas"
+  },
+  {
+    "active": true,
+    "price": 7500,
+    "name": "Blusa azul manga campana",
+    "categoryLabel": "Blusas",
+    "inOffer": false,
+    "id": "b12",
+    "image": "assets/productos/b12-1.png",
+    "description": "Blusa azul manga campana",
     "category": "blusas"
   }
 ]
