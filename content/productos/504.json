@@ -1,0 +1,14 @@
+{
+  "active": true,
+  "price": 16250,
+  "name": "Pantalón gris",
+  "categoryLabel": "Pantalones",
+  "inOffer": false,
+  "images": [
+    "assets/productos/elena-pantalon-v2.png"
+  ],
+  "id": "504",
+  "image": "assets/productos/elena-pantalon-v3.png",
+  "description": "Pantalón gris con cordón vino",
+  "category": "pantalones"
+}
