@@ -1,1 +1,17 @@
-[]
+[
+  {
+    "active": true,
+    "price": 9600,
+    "name": "Abrigo negro para viaje",
+    "categoryLabel": "Ropa Cómoda",
+    "inOffer": false,
+    "images": [
+      "assets/productos/a7-3.png",
+      "assets/productos/a7-2.png"
+    ],
+    "id": "ab001",
+    "image": "assets/productos/a7-1.png",
+    "description": "Abrigo negro con variedad de bolsillos, ideal para viajar",
+    "category": "ropa-comoda"
+  }
+]
