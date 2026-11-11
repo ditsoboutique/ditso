@@ -1,0 +1,14 @@
+{
+  "active": true,
+  "price": 9600,
+  "name": "Blazer naranja y celeste",
+  "categoryLabel": "Blusas",
+  "inOffer": false,
+  "images": [
+    "assets/productos/a13-3.png"
+  ],
+  "id": "bz005",
+  "image": "assets/productos/a13-1.png",
+  "description": "Blazer naranja y celeste",
+  "category": "blusas"
+}
