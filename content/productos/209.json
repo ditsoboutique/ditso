@@ -1,0 +1,14 @@
+{
+  "active": true,
+  "price": 15000,
+  "name": "Vestido azul navy ",
+  "categoryLabel": "Vestidos",
+  "inOffer": false,
+  "images": [
+    "assets/productos/a4-3.png"
+  ],
+  "id": "209",
+  "image": "assets/productos/a4-1.png",
+  "description": "Vestido azul navy ziper con broche dorado en bolsas",
+  "category": "vestidos"
+}
