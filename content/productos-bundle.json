@@ -121,6 +121,17 @@
   },
   {
     "active": true,
+    "price": 8000,
+    "name": "Blusa camisera ",
+    "categoryLabel": "Blusas",
+    "inOffer": false,
+    "id": "b021",
+    "image": "assets/productos/b021.jpg",
+    "description": "Blusa camisera - Color blanco con zíper negro",
+    "category": "blusas"
+  },
+  {
+    "active": true,
     "price": 7500,
     "name": "Blusa azul manga campana",
     "categoryLabel": "Blusas",
