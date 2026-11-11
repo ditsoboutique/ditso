@@ -264,6 +264,17 @@
   },
   {
     "active": true,
+    "price": 15000,
+    "name": "Pantalón cargo rosado",
+    "categoryLabel": "Pantalones",
+    "inOffer": false,
+    "id": "p008",
+    "image": "assets/productos/p008.jpg",
+    "description": "Pantalón cargo - Color rosado",
+    "category": "pantalones"
+  },
+  {
+    "active": true,
     "price": 12000,
     "name": "Short de cuerina",
     "categoryLabel": "Pantalones",
