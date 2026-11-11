@@ -220,6 +220,17 @@
   },
   {
     "active": true,
+    "price": 18500,
+    "name": "Enagua ",
+    "categoryLabel": "Vestidos",
+    "inOffer": false,
+    "id": "eg003",
+    "image": "assets/productos/eg003.jpg",
+    "description": "Enagua maxi Globo - Color blanco",
+    "category": "vestidos"
+  },
+  {
+    "active": true,
     "price": 25000,
     "name": "Gabardina estilo cuero",
     "categoryLabel": "Blusas",
