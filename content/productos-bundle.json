@@ -88,6 +88,17 @@
   },
   {
     "active": true,
+    "price": 15000,
+    "name": "Enagua de cuerina de paletones",
+    "categoryLabel": "Vestidos",
+    "inOffer": false,
+    "id": "eg001",
+    "image": "assets/productos/eg001.jpg",
+    "description": "Enagua de cuerina de paletones, color negro.",
+    "category": "vestidos"
+  },
+  {
+    "active": true,
     "price": 12000,
     "name": "Short de cuerina",
     "categoryLabel": "Pantalones",
