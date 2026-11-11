@@ -283,5 +283,16 @@
     "image": "assets/productos/gemini_generated_image_kw6vzpkw6vzpkw6v.jpg",
     "description": "Short corto color negro con elástico en cintura, material tipo cuerina.",
     "category": "pantalones"
+  },
+  {
+    "active": true,
+    "price": 15000,
+    "name": "Vestido manga larga ",
+    "categoryLabel": "Vestidos",
+    "inOffer": false,
+    "id": "v010",
+    "image": "assets/productos/v010.jpg",
+    "description": "Vestido largo medio ,manga larga - Color azul con decorado en bolsas",
+    "category": "vestidos"
   }
 ]
