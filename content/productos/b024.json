@@ -1,0 +1,11 @@
+{
+  "active": true,
+  "price": 10000,
+  "name": "Blusa con flores",
+  "categoryLabel": "Blusas",
+  "inOffer": false,
+  "id": "b024",
+  "image": "assets/productos/b024.jpg",
+  "description": "Blusa sin mangas, cuello redondo - Accesorios flores. Color rosado.",
+  "category": "blusas"
+}
