@@ -1,0 +1,11 @@
+{
+  "active": true,
+  "price": 18500,
+  "name": "Pantalón cargo",
+  "categoryLabel": "Pantalones",
+  "inOffer": false,
+  "id": "p005",
+  "image": "assets/productos/p005.jpg",
+  "description": "Pantalón cargo - Color celeste mezclilla",
+  "category": "pantalones"
+}
