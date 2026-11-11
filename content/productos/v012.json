@@ -1,0 +1,11 @@
+{
+  "active": true,
+  "price": 10000,
+  "name": "Vestido manga 3/4",
+  "categoryLabel": "Vestidos",
+  "inOffer": false,
+  "id": "v012",
+  "image": "assets/productos/v012.jpg",
+  "description": "Vestido largo medio, manga 3/4- Color azul tipo mezclilla",
+  "category": "vestidos"
+}
