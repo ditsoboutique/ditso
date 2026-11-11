@@ -132,6 +132,17 @@
   },
   {
     "active": true,
+    "price": 12000,
+    "name": "Blusa - Botones con perlas",
+    "categoryLabel": "Blusas",
+    "inOffer": false,
+    "id": "b022",
+    "image": "assets/productos/b022.jpg",
+    "description": "Blusa cuello V - Color papaya - Botones con perlas",
+    "category": "blusas"
+  },
+  {
+    "active": true,
     "price": 7500,
     "name": "Blusa azul manga campana",
     "categoryLabel": "Blusas",
