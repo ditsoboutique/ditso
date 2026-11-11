@@ -110,6 +110,17 @@
   },
   {
     "active": true,
+    "price": 10000,
+    "name": "Pantalón estilo cuerina",
+    "categoryLabel": "Pantalones",
+    "inOffer": false,
+    "id": "p007",
+    "image": "assets/productos/p007.jpg",
+    "description": "Pantalón estilo cuerina - Color negro",
+    "category": "pantalones"
+  },
+  {
+    "active": true,
     "price": 12000,
     "name": "Short de cuerina",
     "categoryLabel": "Pantalones",
