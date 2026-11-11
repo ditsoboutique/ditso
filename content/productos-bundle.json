@@ -165,6 +165,17 @@
   },
   {
     "active": true,
+    "price": 18500,
+    "name": "Blazer negro con botones dorados",
+    "categoryLabel": "Blusas",
+    "inOffer": false,
+    "id": "bz06",
+    "image": "assets/productos/bz06.jpg",
+    "description": "Blazer - Color negro con botones dorados",
+    "category": "blusas"
+  },
+  {
+    "active": true,
     "price": 15000,
     "name": "Enagua de cuerina de paletones",
     "categoryLabel": "Vestidos",
