@@ -1,0 +1,14 @@
+{
+  "active": true,
+  "price": 12500,
+  "name": "Pantalón recto",
+  "categoryLabel": "Pantalones",
+  "inOffer": false,
+  "images": [
+    "assets/productos/a15-1.png"
+  ],
+  "id": "503",
+  "image": "assets/productos/carolina-blusa-blanca-tropical-y-pantalon-gris.png",
+  "description": "Pantalón gris, recto",
+  "category": "pantalones"
+}
