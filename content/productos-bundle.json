@@ -88,6 +88,17 @@
   },
   {
     "active": true,
+    "price": 10000,
+    "name": "Blusa manga larga ",
+    "categoryLabel": "Blusas",
+    "inOffer": false,
+    "id": "b017",
+    "image": "assets/productos/b017.jpg",
+    "description": "Blusa manga larga - cuello cuadrado - Color vino",
+    "category": "blusas"
+  },
+  {
+    "active": true,
     "price": 7500,
     "name": "Blusa azul manga campana",
     "categoryLabel": "Blusas",
