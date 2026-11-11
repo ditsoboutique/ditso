@@ -1,0 +1,11 @@
+{
+  "active": true,
+  "price": 9000,
+  "name": "Vestido maxi gris",
+  "categoryLabel": "Vestidos",
+  "inOffer": false,
+  "id": "211",
+  "image": "assets/productos/colección-olivo-vestido-a-sin-logo.png",
+  "description": "Vestido maxi gris liso",
+  "category": "vestidos"
+}
