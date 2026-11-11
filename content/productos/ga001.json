@@ -1,0 +1,11 @@
+{
+  "active": true,
+  "price": 25000,
+  "name": "Gabardina estilo cuero",
+  "categoryLabel": "Blusas",
+  "inOffer": false,
+  "id": "ga001",
+  "image": "assets/productos/ga001.jpg",
+  "description": "Gabardina color negro, estilo cuero",
+  "category": "blusas"
+}
