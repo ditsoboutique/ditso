@@ -1,0 +1,14 @@
+{
+  "active": true,
+  "price": 5000,
+  "name": "Blusa floreada",
+  "categoryLabel": "Blusas",
+  "inOffer": false,
+  "images": [
+    "assets/productos/carolina-blusa-cuello-chino-flores-pequenas-de-frente.png"
+  ],
+  "id": "109",
+  "image": "assets/productos/carolina-blusa-cuello-chino-flores-pequenas.png",
+  "description": "Blusa floreada (estampado pequeño) verde con blanco. Talla XS",
+  "category": "blusas"
+}
