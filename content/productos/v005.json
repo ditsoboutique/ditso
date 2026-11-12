@@ -1,0 +1,14 @@
+{
+  "active": true,
+  "price": 10800,
+  "name": "Vestido espalda cruzada",
+  "categoryLabel": "Vestidos",
+  "inOffer": false,
+  "images": [
+    "assets/productos/v005-a.png"
+  ],
+  "id": "v005",
+  "image": "assets/productos/v005-b.png",
+  "description": "Vestido gris claro - con bolsas  - espalda cruzada",
+  "category": "vestidos"
+}
