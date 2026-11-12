@@ -1,0 +1,15 @@
+{
+  "active": true,
+  "price": 12500,
+  "name": "Palazzo plisado",
+  "categoryLabel": "Pantalones",
+  "inOffer": false,
+  "images": [
+    "assets/productos/carolina-palazzo-rosado.png",
+    "assets/productos/carolina-jacket-mezclilla-y-palazzo-rosado.png"
+  ],
+  "id": "501",
+  "image": "assets/productos/palazzo-rosado-con-leve-error-en-la-cintura.png",
+  "description": "Palazzo rosado plisado",
+  "category": "pantalones"
+}
